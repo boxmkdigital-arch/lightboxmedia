@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&amp;family=Roboto+Mono:wght@400;500&amp;display=swap&amp;subset=latin,cyrillic" rel="stylesheet">
+<script src="./image-slot.js"></script>
+<style>
+  html, body { margin:0; padding:0; background:#07070a; color:#f2f2f4; font-family:Roboto, Helvetica, Arial, sans-serif; -webkit-font-smoothing:antialiased; }
+  * { box-sizing:border-box; }
+  a { color:#f2f2f4; text-decoration:none; }
+  a:hover { color:#ffffff; }
+  input, textarea, select, button { font-family:Roboto, Helvetica, Arial, sans-serif; }
+  ::placeholder { color:#5c5c66; }
+  @keyframes lbpulse { 0%{ transform:scale(1); opacity:.55 } 70%{ transform:scale(2.6); opacity:0 } 100%{ transform:scale(2.6); opacity:0 } }
+</style>
+</helmet>
+
+<div style="min-height:100vh;background:
+    radial-gradient(1100px 600px at 78% -10%, rgba(56,132,255,.16), transparent 60%),
+    radial-gradient(900px 520px at 6% 8%, rgba(255,138,46,.09), transparent 62%),
+    #07070a;">
+
+  <!-- NAV -->
+  <div style="position:sticky;top:0;z-index:50;background:rgba(8,8,11,.82);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid rgba(255,255,255,.07)">
+    
+  <div style="max-width:1280px;margin:0 auto;padding:0 40px;height:76px;display:flex;align-items:center;gap:40px">
+
+      <a href="#" onClick="{{ goHome }}" style="display:flex;align-items:center;flex:0 0 auto">
+        <img src="assets/logo-white.png" alt="Lightbox Media" style="height:46px;width:auto;display:block">
+      </a>
+
+      <div style="display:flex;align-items:center;gap:34px;margin-left:auto">
+        <a href="#" onClick="{{ goHome }}" style="display:inline-grid;align-items:center;justify-items:start;font-size:13px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:#a3a3ac" style-hover="color:#ffffff">
+          <span style="{{ mkText }}">Дома</span>
+          <span style="{{ enText }}">Home</span>
+        </a>
+        <a href="#" onClick="{{ goLocations }}" style="display:inline-grid;align-items:center;justify-items:start;font-size:13px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:#a3a3ac" style-hover="color:#ffffff">
+          <span style="{{ mkText }}">Локации</span>
+          <span style="{{ enText }}">Locations</span>
+        </a>
+        <a href="#" onClick="{{ goServices }}" style="display:inline-grid;align-items:center;justify-items:start;font-size:13px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:#a3a3ac" style-hover="color:#ffffff">
+          <span style="{{ mkText }}">Услуги</span>
+          <span style="{{ enText }}">Services</span>
+        </a>
+        <a href="#" onClick="{{ goPortfolio }}" style="display:inline-grid;align-items:center;justify-items:start;font-size:13px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:#a3a3ac" style-hover="color:#ffffff">
+          <span style="{{ mkText }}">Портфолио</span>
+          <span style="{{ enText }}">Portfolio</span>
+        </a>
+        <a href="#" onClick="{{ goContact }}" style="display:inline-grid;align-items:center;justify-items:start;font-size:13px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:#a3a3ac" style-hover="color:#ffffff">
+          <span style="{{ mkText }}">Контакт</span>
+          <span style="{{ enText }}">Contact</span>
+        </a>
+      </div>
+
+      <div style="display:flex;align-items:center;gap:20px">
+        <button onClick="{{ toggleLang }}" style="display:flex;align-items:center;gap:7px;background:transparent;border:1px solid rgba(255,255,255,.14);border-radius:999px;padding:7px 13px;cursor:pointer;font-size:11px;font-weight:700;letter-spacing:.14em" style-hover="border-color:rgba(255,255,255,.34)">
+          <span style="{{ mkPill }}">MK</span>
+          <span style="color:#3d3d45">|</span>
+          <span style="{{ enPill }}">EN</span>
+        </button>
+        <button onClick="{{ goContact }}" style="display: inline-grid; justify-items: center; color: #07070a; border: 0; border-radius: 999px; padding: 12px 24px; cursor: pointer; font-size: 13px; font-weight: 700; letter-spacing: .04em; box-shadow: 0 0 0 rgba(255,255,255,0); transition: box-shadow .3s ease,transform .3s ease; background-color: #0ABA02; text-transform: uppercase" style-hover="box-shadow:0 8px 34px rgba(255,255,255,.22);transform:translateY(-1px)">
+          <span style="{{ mkText }}">Резервирај</span>
+          <span style="{{ enText }}">Book now</span>
+        </button>
+      </div>
+    </div></div>
+
+  <!-- ============ HOME ============ -->
+  <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+  <div>
+    <!-- HERO -->
+    <div style="position:relative;min-height:640px;display:flex;align-items:center;overflow:hidden;border-bottom:1px solid rgba(255,255,255,.07)">
+      <div onDragOver="{{ dragOver }}" onDrop="{{ dropHomeHero }}" style="position:absolute;inset:0">
+
+        <div style="position:absolute;inset:0">{{ homeHeroPlayer }}</div>
+        <sc-if value="{{ noHomeHeroVideo }}" hint-placeholder-val="{{ true }}">
+          <image-slot id="home-hero" shape="rect" style="width:100%;height:100%" placeholder="Довлечете видео или слика тука"></image-slot>
+        </sc-if>
+      </div>
+      <div style="position:absolute;inset:0;background:rgba(0,0,0,.62);pointer-events:none"></div>
+      <div style="position:absolute;inset:0;background:linear-gradient(100deg, rgba(7,7,10,.9) 0%, rgba(7,7,10,.62) 46%, rgba(7,7,10,.2) 100%);pointer-events:none"></div>
+      <div style="position:relative;max-width:1280px;margin:0 auto;padding:120px 40px;width:100%;pointer-events:none">
+        <div style="font-family: 'Roboto Mono',monospace; font-size: 11px; letter-spacing: .32em; text-transform: uppercase; color: #0ABA02">{{ t.homeEyebrow }}</div>
+        <h1 style="margin:26px 0 0;max-width:900px;font-size:76px;line-height:1.02;font-weight:900;letter-spacing:-.035em;text-wrap:pretty">{{ t.homeTitle }}</h1>
+        <p style="margin:28px 0 0;max-width:620px;font-size:19px;line-height:1.6;font-weight:300;color:#a8a8b2;text-wrap:pretty">{{ t.homeSub }}</p>
+        <div style="margin-top:44px;display:flex;gap:14px;flex-wrap:wrap;pointer-events:auto">
+          <button onClick="{{ goContact }}" style="border:0;border-radius:999px;padding:16px 30px;cursor:pointer;font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background-color:#0ABA02;color:#07070a;transition:transform .3s ease,box-shadow .3s ease" style-hover="transform:translateY(-1px);box-shadow:0 10px 34px rgba(10,186,2,.35)">{{ t.ctaBook }}</button>
+          <button onClick="{{ goLocations }}" style="background:transparent;border:1px solid rgba(255,255,255,.22);border-radius:999px;padding:16px 30px;cursor:pointer;font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#fff;transition:border-color .3s ease" style-hover="border-color:rgba(255,255,255,.55)">{{ t.ctaLocations }}</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- BENEFITS -->
+    <div style="max-width:1280px;margin:0 auto;padding:88px 40px 0">
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.08);border-radius:18px;overflow:hidden">
+        <sc-for list="{{ benefits }}" as="b" hint-placeholder-count="4">
+          <div style="background:#08080b;padding:34px 28px;min-height:190px;display:flex;flex-direction:column;gap:16px">
+            <span style="width:9px;height:9px;border-radius:2px;background:{{ b.color }};box-shadow:0 0 14px {{ b.color }}"></span>
+            <div style="font-size:16px;line-height:1.5;font-weight:400;color:#dcdce2;text-wrap:pretty">{{ b.text }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+
+    <!-- MAP -->
+    <div style="max-width:1280px;margin:0 auto;padding:88px 40px 0">
+    <div style="margin-top:0;position:relative;border:1px solid rgba(255,255,255,.08);border-radius:20px;overflow:hidden;background:
+        radial-gradient(600px 300px at 50% 30%, rgba(56,132,255,.14), transparent 70%),
+        linear-gradient(#0b0b10,#08080b)">
+      <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px),linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px);background-size:56px 56px"></div>
+      <div style="position:relative;height:440px">
+
+        <div onMouseEnter="{{ enterSkopje }}" onMouseLeave="{{ leavePin }}" style="position:absolute;top:24%;left:53%;padding:10px;margin:-10px">
+          <div style="position:absolute;top:34px;right:-10px;width:300px;z-index:5;pointer-events:none">
+            <div style="{{ popSkopje }}">
+              <div style="border:1px solid rgba(255,255,255,.14);border-radius:14px;overflow:hidden;background:rgba(10,10,16,.92);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:0 24px 60px rgba(0,0,0,.6)">
+                <image-slot id="home-pin-skopje" shape="rect" style="width:100%;height:170px" placeholder="Скопје — фото на екранот"></image-slot>
+                <div style="padding:14px 16px">
+                  <div style="font-size:14px;font-weight:700">Скопје — Аеродром</div>
+                  <div style="margin-top:5px;font-family:'Roboto Mono',monospace;font-size:10px;letter-spacing:.12em;color:#7b7b86;text-transform:uppercase">50 m² · ТЦ Бисер</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div style="position:relative;width:14px;height:14px;border-radius:50%;background:oklch(0.72 0.17 245);box-shadow:0 0 24px oklch(0.72 0.17 245 / .9)">
+            <span style="position:absolute;inset:0;border-radius:50%;background:oklch(0.72 0.17 245);animation:lbpulse 2.6s ease-out infinite"></span>
+          </div>
+          <div style="position:absolute;left:26px;top:-6px;white-space:nowrap">
+            <div style="font-size:16px;font-weight:700">Скопје</div>
+            <div style="font-family:'Roboto Mono',monospace;font-size:10px;letter-spacing:.14em;color:#7b7b86">50 m² · ТЦ БИСЕР, АЕРОДРОМ</div>
+          </div>
+        </div>
+
+        <div onMouseEnter="{{ enterOhrid }}" onMouseLeave="{{ leavePin }}" style="position:absolute;top:63%;left:20%;padding:10px;margin:-10px">
+          <div style="position:absolute;bottom:34px;left:-10px;width:300px;z-index:5;pointer-events:none">
+            <div style="{{ popOhrid }}">
+              <div style="border:1px solid rgba(255,255,255,.14);border-radius:14px;overflow:hidden;background:rgba(10,10,16,.92);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:0 24px 60px rgba(0,0,0,.6)">
+                <image-slot id="home-pin-ohrid" shape="rect" style="width:100%;height:170px" placeholder="Охрид — фото на екранот"></image-slot>
+                <div style="padding:14px 16px">
+                  <div style="font-size:14px;font-weight:700">Охрид — Центар</div>
+                  <div style="margin-top:5px;font-family:'Roboto Mono',monospace;font-size:10px;letter-spacing:.12em;color:#7b7b86;text-transform:uppercase">40 m² · Главен кружен тек</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div style="position:relative;width:14px;height:14px;border-radius:50%;background:oklch(0.72 0.17 55);box-shadow:0 0 24px oklch(0.72 0.17 55 / .9)">
+            <span style="position:absolute;inset:0;border-radius:50%;background:oklch(0.72 0.17 55);animation:lbpulse 2.6s ease-out .7s infinite"></span>
+          </div>
+          <div style="position:absolute;left:26px;top:-6px;white-space:nowrap">
+            <div style="font-size:16px;font-weight:700">Охрид</div>
+            <div style="font-family:'Roboto Mono',monospace;font-size:10px;letter-spacing:.14em;color:#7b7b86">40 m² · ГЛАВЕН КРУЖЕН ТЕК</div>
+          </div>
+        </div>
+
+        <div onMouseEnter="{{ enterGev }}" onMouseLeave="{{ leavePin }}" style="position:absolute;top:82%;left:60%;padding:10px;margin:-10px">
+          <div style="position:absolute;bottom:34px;right:-10px;width:440px;z-index:5;pointer-events:none">
+            <div style="{{ popGev }}">
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+                <div style="border:1px solid rgba(255,255,255,.14);border-radius:14px;overflow:hidden;background:rgba(10,10,16,.92);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:0 24px 60px rgba(0,0,0,.6)">
+                  <image-slot id="home-pin-gev-plostad" shape="rect" style="width:100%;height:150px" placeholder="Плоштад — фото"></image-slot>
+                  <div style="padding:13px 15px">
+                    <div style="font-size:13px;font-weight:700">Гевгелија — Плоштад</div>
+                    <div style="margin-top:5px;font-family:'Roboto Mono',monospace;font-size:10px;letter-spacing:.12em;color:#7b7b86;text-transform:uppercase">15 m²</div>
+                  </div>
+                </div>
+                <div style="border:1px solid rgba(255,255,255,.14);border-radius:14px;overflow:hidden;background:rgba(10,10,16,.92);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:0 24px 60px rgba(0,0,0,.6)">
+                  <image-slot id="home-pin-gev-bulevar" shape="rect" style="width:100%;height:150px" placeholder="Булевар — фото"></image-slot>
+                  <div style="padding:13px 15px">
+                    <div style="font-size:13px;font-weight:700">Гевгелија — Булевар</div>
+                    <div style="margin-top:5px;font-family:'Roboto Mono',monospace;font-size:10px;letter-spacing:.12em;color:#7b7b86;text-transform:uppercase">15 m² · Кружен тек</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div style="position:relative;width:14px;height:14px;border-radius:50%;background:oklch(0.72 0.17 145);box-shadow:0 0 24px oklch(0.72 0.17 145 / .9)">
+            <span style="position:absolute;inset:0;border-radius:50%;background:oklch(0.72 0.17 145);animation:lbpulse 2.6s ease-out 1.4s infinite"></span>
+          </div>
+          <div style="position:absolute;left:26px;top:-6px;white-space:nowrap">
+            <div style="font-size:16px;font-weight:700">Гевгелија</div>
+            <div style="font-family:'Roboto Mono',monospace;font-size:10px;letter-spacing:.14em;color:#7b7b86">2 × 15 m² · ПЛОШТАД + БУЛЕВАР</div>
+          </div>
+        </div>
+
+        <div style="position:absolute;left:28px;bottom:24px;font-family:'Roboto Mono',monospace;font-size:10px;letter-spacing:.22em;color:#4a4a54;text-transform:uppercase">{{ t.mapNote }}</div>
+      </div>
+    </div>
+    </div>
+
+    <!-- REACH -->
+    <div style="max-width:1280px;margin:0 auto;padding:88px 40px 104px">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center">
+        <div>
+          <div style="font-size: 104px; line-height: .92; font-weight: 900; letter-spacing: -.045em; text-shadow: 0px 0px 54px #2F903A">1.000.000+</div>
+          <div style="margin-top:18px;font-size:17px;font-weight:500;letter-spacing:.03em;color:#a8a8b2">{{ t.reachLong }}</div>
+        </div>
+        <div style="border-left:1px solid rgba(255,255,255,.1);padding-left:56px;display:flex;flex-direction:column;gap:22px">
+          <sc-for list="{{ homeNet }}" as="n" hint-placeholder-count="3">
+            <div style="display:flex;align-items:baseline;justify-content:space-between;gap:24px;border-bottom:1px solid rgba(255,255,255,.07);padding-bottom:18px">
+              <div>
+                <div style="font-size:19px;font-weight:700;letter-spacing:-.01em;color:{{ n.color }}">{{ n.city }}</div>
+                <div style="margin-top:6px;font-family:'Roboto Mono',monospace;font-size:10px;letter-spacing:.14em;color:#6d6d78;text-transform:uppercase">{{ n.addr }}</div>
+              </div>
+              <div style="font-family:'Roboto Mono',monospace;font-size:14px;color:{{ n.color }};white-space:nowrap">{{ n.size }}</div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+
+    <!-- CLIENTS STRIP -->
+    <div style="border-top:1px solid rgba(255,255,255,.07);border-bottom:1px solid rgba(255,255,255,.07)">
+      <div style="max-width:1280px;margin:0 auto;padding:56px 40px;display:flex;align-items:center;gap:48px;flex-wrap:wrap;justify-content:space-between">
+        <div style="font-family:'Roboto Mono',monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#6d6d78;white-space:nowrap">{{ t.trustedBy }}</div>
+        <div style="display:grid;grid-template-columns:repeat(5,120px);gap:32px">
+          <sc-for list="{{ homeLogos }}" as="l" hint-placeholder-count="5">
+            <div style="{{ l.wrap }}" style-hover="{{ l.wrapHover }}">
+              <image-slot id="{{ l.id }}" shape="rect" fit="contain" style="width:120px;height:56px" placeholder="лого"></image-slot>
+            </div>
+          </sc-for>
+        </div>
+        <a href="#" onClick="{{ goPortfolio }}" style="font-family:'Roboto Mono',monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#a3a3ac;white-space:nowrap" style-hover="color:#ffffff">{{ t.seeAll }} →</a>
+      </div>
+    </div>
+
+    <!-- CTA BAND -->
+    <div style="max-width:1280px;margin:0 auto;padding:96px 40px 120px">
+      <div style="position:relative;border:1px solid rgba(255,255,255,.12);border-radius:22px;overflow:hidden;background:linear-gradient(120deg, rgba(255,255,255,.07), rgba(255,255,255,.02));backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px)">
+        <div style="position:absolute;inset:0;background:radial-gradient(520px 260px at 85% 30%, oklch(0.72 0.17 245 / .22), transparent 70%)"></div>
+        <div style="position:relative;padding:56px;display:grid;grid-template-columns:1fr auto;gap:48px;align-items:center">
+          <div>
+            <h2 style="margin:0;max-width:640px;font-size:40px;line-height:1.1;font-weight:900;letter-spacing:-.03em;text-wrap:pretty">{{ t.homeCta }}</h2>
+            <div style="margin-top:22px;display:flex;gap:26px;flex-wrap:wrap;font-size:17px;font-weight:500;color:#c8c8d0">
+              <a href="tel:078320230" style-hover="color:oklch(0.72 0.17 245)">078 320 230</a>
+              <a href="tel:070223286">070 223 286</a>
+              <a href="mailto:info@lightboxmedia.mk" style="color: #0ABA02; overflow: visible">info@lightboxmedia.mk</a>
+            </div>
+          </div>
+          <button onClick="{{ goContact }}" style="border:0;border-radius:999px;padding:18px 34px;cursor:pointer;font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background-color:#0ABA02;color:#07070a;white-space:nowrap;transition:transform .3s ease,box-shadow .3s ease" style-hover="transform:translateY(-1px);box-shadow:0 10px 34px rgba(10,186,2,.35)">{{ t.ctaBook }}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  </sc-if>
+
+  <!-- ============ LOCATIONS ============ -->
+  <sc-if value="{{ isLocations }}">
+  <div style="max-width:1280px;margin:0 auto;padding:96px 40px 120px">
+
+    <!-- HERO VIDEO -->
+    
+
+
+    <div style="margin-top:72px;display:flex;align-items:flex-end;justify-content:space-between;gap:60px;flex-wrap:wrap">
+      <div style="max-width:660px">
+        
+        <h1 style="margin: 20px 0 0; font-size: 84px; line-height: .94; font-weight: 900; letter-spacing: -.03em; color: #0ABA02">{{ t.locTitle }}</h1>
+        <p style="margin:26px 0 0;font-size:19px;line-height:1.6;font-weight:300;color:#9c9ca6;text-wrap:pretty">{{ t.locSub }}</p>
+      </div>
+      <div style="display:flex;gap:12px;font-family:'Roboto Mono',monospace;font-size:11px;letter-spacing:.18em;color:#6e6e79;text-transform:uppercase">
+        <span>Скопје</span><span style="color:#33333b">/</span><span>Охрид</span><span style="color:#33333b">/</span><span>Гевгелија</span>
+      </div>
+    </div>
+
+    <!-- MAP -->
+    <div style="margin-top:56px;position:relative;border:1px solid rgba(255,255,255,.08);border-radius:20px;overflow:hidden;background:
+        radial-gradient(600px 300px at 50% 30%, rgba(56,132,255,.14), transparent 70%),
+        linear-gradient(#0b0b10,#08080b)">
+      <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px),linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px);background-size:56px 56px"></div>
+      <div style="position:relative;height:440px">
+
+        <div onMouseEnter="{{ enterSkopje }}" onMouseLeave="{{ leavePin }}" style="position:absolute;top:24%;left:53%;padding:10px;margin:-10px">
+          <div style="position:absolute;top:34px;right:-10px;width:300px;z-index:5;pointer-events:none">
+            <div style="{{ popSkopje }}">
+              <div style="border:1px solid rgba(255,255,255,.14);border-radius:14px;overflow:hidden;background:rgba(10,10,16,.92);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:0 24px 60px rgba(0,0,0,.6)">
+                <image-slot id="pin-skopje" shape="rect" style="width:100%;height:170px" placeholder="Скопје — фото на екранот"></image-slot>
+                <div style="padding:14px 16px">
+                  <div style="font-size:14px;font-weight:700">Скопје — Аеродром</div>
+                  <div style="margin-top:5px;font-family:'Roboto Mono',monospace;font-size:10px;letter-spacing:.12em;color:#7b7b86;text-transform:uppercase">50 m² · ТЦ Бисер</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div style="position:relative;width:14px;height:14px;border-radius:50%;background:oklch(0.72 0.17 245);box-shadow:0 0 24px oklch(0.72 0.17 245 / .9)">
+            <span style="position:absolute;inset:0;border-radius:50%;background:oklch(0.72 0.17 245);animation:lbpulse 2.6s ease-out infinite"></span>
+          </div>
+          <div style="position:absolute;left:26px;top:-6px;white-space:nowrap">
+            <div style="font-size:16px;font-weight:700">Скопје</div>
+            <div style="font-family:'Roboto Mono',monospace;font-size:10px;letter-spacing:.14em;color:#7b7b86">50 m² · ТЦ БИСЕР, АЕРОДРОМ</div>
+          </div>
+        </div>
+
+        <div onMouseEnter="{{ enterOhrid }}" onMouseLeave="{{ leavePin }}" style="position:absolute;top:63%;left:20%;padding:10px;margin:-10px">
+          <div style="position:absolute;bottom:34px;left:-10px;width:300px;z-index:5;pointer-events:none">
+            <div style="{{ popOhrid }}">
+              <div style="border:1px solid rgba(255,255,255,.14);border-radius:14px;overflow:hidden;background:rgba(10,10,16,.92);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:0 24px 60px rgba(0,0,0,.6)">
+                <image-slot id="pin-ohrid" shape="rect" style="width:100%;height:170px" placeholder="Охрид — фото на екранот"></image-slot>
+                <div style="padding:14px 16px">
+                  <div style="font-size:14px;font-weight:700">Охрид — Центар</div>
+                  <div style="margin-top:5px;font-family:'Roboto Mono',monospace;font-size:10px;letter-spacing:.12em;color:#7b7b86;text-transform:uppercase">40 m² · Главен кружен тек</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div style="position:relative;width:14px;height:14px;border-radius:50%;background:oklch(0.72 0.17 55);box-shadow:0 0 24px oklch(0.72 0.17 55 / .9)">
+            <span style="position:absolute;inset:0;border-radius:50%;background:oklch(0.72 0.17 55);animation:lbpulse 2.6s ease-out .7s infinite"></span>
+          </div>
+          <div style="position:absolute;left:26px;top:-6px;white-space:nowrap">
+            <div style="font-size:16px;font-weight:700">Охрид</div>
+            <div style="font-family:'Roboto Mono',monospace;font-size:10px;letter-spacing:.14em;color:#7b7b86">40 m² · ГЛАВЕН КРУЖЕН ТЕК</div>
+          </div>
+        </div>
+
+        <div onMouseEnter="{{ enterGev }}" onMouseLeave="{{ leavePin }}" style="position:absolute;top:82%;left:60%;padding:10px;margin:-10px">
+          <div style="position:absolute;bottom:34px;right:-10px;width:440px;z-index:5;pointer-events:none">
+            <div style="{{ popGev }}">
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+                <div style="border:1px solid rgba(255,255,255,.14);border-radius:14px;overflow:hidden;background:rgba(10,10,16,.92);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:0 24px 60px rgba(0,0,0,.6)">
+                  <image-slot id="pin-gev-plostad" shape="rect" style="width:100%;height:150px" placeholder="Плоштад — фото"></image-slot>
+                  <div style="padding:13px 15px">
+                    <div style="font-size:13px;font-weight:700">Гевгелија — Плоштад</div>
+                    <div style="margin-top:5px;font-family:'Roboto Mono',monospace;font-size:10px;letter-spacing:.12em;color:#7b7b86;text-transform:uppercase">15 m²</div>
+                  </div>
+                </div>
+                <div style="border:1px solid rgba(255,255,255,.14);border-radius:14px;overflow:hidden;background:rgba(10,10,16,.92);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:0 24px 60px rgba(0,0,0,.6)">
+                  <image-slot id="pin-gev-bulevar" shape="rect" style="width:100%;height:150px" placeholder="Булевар — фото"></image-slot>
+                  <div style="padding:13px 15px">
+                    <div style="font-size:13px;font-weight:700">Гевгелија — Булевар</div>
+                    <div style="margin-top:5px;font-family:'Roboto Mono',monospace;font-size:10px;letter-spacing:.12em;color:#7b7b86;text-transform:uppercase">15 m² · Кружен тек</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div style="position:relative;width:14px;height:14px;border-radius:50%;background:oklch(0.72 0.17 145);box-shadow:0 0 24px oklch(0.72 0.17 145 / .9)">
+            <span style="position:absolute;inset:0;border-radius:50%;background:oklch(0.72 0.17 145);animation:lbpulse 2.6s ease-out 1.4s infinite"></span>
+          </div>
+          <div style="position:absolute;left:26px;top:-6px;white-space:nowrap">
+            <div style="font-size:16px;font-weight:700">Гевгелија</div>
+            <div style="font-family:'Roboto Mono',monospace;font-size:10px;letter-spacing:.14em;color:#7b7b86">2 × 15 m² · ПЛОШТАД + БУЛЕВАР</div>
+          </div>
+        </div>
+
+        <div style="position:absolute;left:28px;bottom:24px;font-family:'Roboto Mono',monospace;font-size:10px;letter-spacing:.22em;color:#4a4a54;text-transform:uppercase">{{ t.mapNote }}</div>
+      </div>
+    </div>
+
+    <!-- CARDS -->
+    <div style="margin-top:28px;display:grid;grid-template-columns:repeat(3,1fr);gap:20px">
+
+      <div style="border:1px solid rgba(255,255,255,.08);border-radius:18px;overflow:hidden;background:#0c0c11;transition:border-color .3s ease,transform .3s ease" style-hover="border-color:oklch(0.72 0.17 245 / .55);transform:translateY(-4px)">
+        <div style="position:relative;height:210px;background-color:#0a0a10">
+
+          <a href="https://www.youtube.com/watch?v=a0LOYsoLJPA" onClick="{{ openSkopje }}" title="Скопје — Аеродром" style="position:absolute;inset:0;display:block;cursor:pointer">
+            <img src="https://img.youtube.com/vi/a0LOYsoLJPA/maxresdefault.jpg" alt="Скопје — Аеродром" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+            <div style="position:absolute;inset:0;display:grid;place-items:center;background:linear-gradient(to top, rgba(7,7,10,.75), rgba(7,7,10,.12));transition:opacity .3s ease;pointer-events:none">
+              <span style="display:flex;align-items:center;gap:10px;font-size:12px;font-weight:700;letter-spacing:.18em;color:#fff">▶ {{ t.play }}</span>
+            </div>
+          </a>
+        </div>
+        <div style="padding:24px">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
+            <div style="font-size:21px;font-weight:700;letter-spacing:-.01em">Скопје — Аеродром</div>
+            <div style="font-family:'Roboto Mono',monospace;font-size:12px;color:oklch(0.72 0.17 245)">50 m²</div>
+          </div>
+          <div style="margin-top:8px;font-family:'Roboto Mono',monospace;font-size:10px;letter-spacing:.12em;color:#63636e;text-transform:uppercase">{{ t.addr1 }}</div>
+          <p style="margin:14px 0 0;font-size:14px;line-height:1.65;color:#8e8e99;font-weight:300">{{ t.card1 }}</p>
+        </div>
+      </div>
+
+      <div style="border:1px solid rgba(255,255,255,.08);border-radius:18px;overflow:hidden;background:#0c0c11;transition:border-color .3s ease,transform .3s ease" style-hover="border-color:oklch(0.72 0.17 55 / .55);transform:translateY(-4px)">
+        <div style="position:relative;height:210px;background-color:#0a0a10">
+
+          <a href="https://www.youtube.com/watch?v=Pv317kdpnAE" onClick="{{ openOhrid }}" title="Охрид — Центар" style="position:absolute;inset:0;display:block;cursor:pointer">
+            <img src="https://img.youtube.com/vi/Pv317kdpnAE/sddefault.jpg" alt="Охрид — Центар" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+            <div style="position:absolute;inset:0;display:grid;place-items:center;background:linear-gradient(to top, rgba(7,7,10,.75), rgba(7,7,10,.12));transition:opacity .3s ease;pointer-events:none">
+              <span style="display:flex;align-items:center;gap:10px;font-size:12px;font-weight:700;letter-spacing:.18em;color:#fff">▶ {{ t.play }}</span>
+            </div>
+          </a>
+        </div>
+        <div style="padding:24px">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
+            <div style="font-size:21px;font-weight:700;letter-spacing:-.01em">Охрид — Центар</div>
+            <div style="font-family:'Roboto Mono',monospace;font-size:12px;color:oklch(0.72 0.17 55)">40 m²</div>
+          </div>
+          <div style="margin-top:8px;font-family:'Roboto Mono',monospace;font-size:10px;letter-spacing:.12em;color:#63636e;text-transform:uppercase">{{ t.addr2 }}</div>
+          <p style="margin:14px 0 0;font-size:14px;line-height:1.65;color:#8e8e99;font-weight:300">{{ t.card2 }}</p>
+        </div>
+      </div>
+
+      <div style="border:1px solid rgba(255,255,255,.08);border-radius:18px;overflow:hidden;background:#0c0c11;transition:border-color .3s ease,transform .3s ease" style-hover="border-color:oklch(0.72 0.17 145 / .55);transform:translateY(-4px)">
+        <div onDragOver="{{ dragOver }}" onDrop="{{ dropGev }}" onMouseEnter="{{ hoverPlay }}" onMouseLeave="{{ hoverPause }}" style="position:relative;height:210px;background-color:#0a0a10">
+
+          <image-slot id="card-gev" shape="rect" style="position:absolute;inset:0;width:100%;height:100%" placeholder="Гевгелија — фото/видео на екранот"></image-slot>
+          <div style="position:absolute;inset:0">{{ gevPlayer }}</div>
+          <div style="position:absolute;inset:0;display:grid;place-items:center;background:rgba(7,7,10,.55);opacity:0;transition:opacity .3s ease" style-hover="opacity:1">
+            <span style="display:flex;align-items:center;gap:10px;font-size:12px;font-weight:700;letter-spacing:.18em;color:#fff">▶ {{ t.play }}</span>
+          </div>
+        </div>
+        <div style="padding:24px">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
+            <div style="font-size:21px;font-weight:700;letter-spacing:-.01em">Гевгелија</div>
+            <div style="font-family:'Roboto Mono',monospace;font-size:12px;color:oklch(0.72 0.17 145)">2 × 15 m²</div>
+          </div>
+          <div style="margin-top:8px;font-family:'Roboto Mono',monospace;font-size:10px;letter-spacing:.12em;color:#63636e;text-transform:uppercase">{{ t.addr3 }}</div>
+          <p style="margin:14px 0 0;font-size:14px;line-height:1.65;color:#8e8e99;font-weight:300">{{ t.card3 }}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- STATS -->
+    <div style="margin-top:80px;border-top:1px solid rgba(255,255,255,.08);border-bottom:1px solid rgba(255,255,255,.08);padding:64px 0;display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:48px;align-items:end">
+      <div>
+        <div style="font-size: 82px; line-height: 1; font-weight: 900; letter-spacing: -.04em; color: #fff; text-shadow: 0px 0px 46px #2F903A">1,000,000+</div>
+        <div style="margin-top:16px;font-size:16px;font-weight:500;letter-spacing:.04em;color:#9c9ca6">{{ t.reach }}</div>
+      </div>
+      <div>
+        <div style="font-size:58px;line-height:1;font-weight:900;letter-spacing:-.03em;color:#fff;text-shadow:0 0 36px oklch(0.72 0.17 55 / .45)">5</div>
+        <div style="margin-top:14px;font-size:14px;font-weight:500;letter-spacing:.04em;color:#9c9ca6">{{ t.screens }}</div>
+      </div>
+      <div>
+        <div style="font-size:58px;line-height:1;font-weight:900;letter-spacing:-.03em;color:#fff;text-shadow:0 0 36px oklch(0.72 0.17 145 / .45)">18h</div>
+        <div style="margin-top:14px;font-size:14px;font-weight:500;letter-spacing:.04em;color:#9c9ca6">{{ t.airtime }}</div>
+      </div>
+    </div>
+
+    <!-- VIP -->
+    <sc-if value="{{ showVip }}" hint-placeholder-val="{{ true }}">
+    <div style="margin-top:64px;position:relative;border-radius:22px;overflow:hidden;border:1px solid rgba(255,255,255,.12);background:linear-gradient(120deg, rgba(255,255,255,.07), rgba(255,255,255,.02));backdrop-filter:blur(26px);-webkit-backdrop-filter:blur(26px)">
+      <div style="position:absolute;inset:0;background:radial-gradient(520px 260px at 88% 20%, oklch(0.72 0.17 55 / .22), transparent 70%)"></div>
+      <div style="position:relative;padding:52px 56px;display:grid;grid-template-columns:1fr auto;gap:48px;align-items:center">
+        <div style="max-width:720px">
+          <div style="display:inline-flex;align-items:center;gap:9px;font-family:'Roboto Mono',monospace;font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:oklch(0.72 0.17 55);border:1px solid oklch(0.72 0.17 55 / .35);border-radius:999px;padding:6px 12px">VIP</div>
+          <h3 style="margin:20px 0 0;font-size:36px;line-height:1.12;font-weight:700;letter-spacing:-.02em">{{ t.vipTitle }}</h3>
+          <p style="margin:16px 0 0;font-size:16px;line-height:1.65;font-weight:300;color:#a8a8b2;text-wrap:pretty">{{ t.vipBody }}</p>
+          <div style="margin-top:34px;display:grid;grid-template-columns:repeat(3,1fr);gap:26px">
+            <sc-for list="{{ vipPoints }}" as="v" hint-placeholder-count="3">
+              <div style="border-top:1px solid rgba(255,255,255,.14);padding-top:16px">
+                <div style="font-size:15px;font-weight:700;letter-spacing:-.01em">{{ v.title }}</div>
+                <div style="margin-top:8px;font-size:13px;line-height:1.6;font-weight:300;color:#9797a2;text-wrap:pretty">{{ v.body }}</div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+        <div style="text-align:right">
+          <div style="font-size:76px;line-height:1;font-weight:900;letter-spacing:-.04em">+40%</div>
+          <div style="margin-top:10px;font-family:'Roboto Mono',monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#8c8c96">{{ t.premium }}</div>
+        </div>
+      </div>
+    </div>
+    </sc-if>
+  </div>
+  </sc-if>
+
+  <!-- ============ SERVICES ============ -->
+  <sc-if value="{{ isServices }}">
+  <div style="max-width:1280px;margin:0 auto;padding:96px 40px 120px">
+    <div style="max-width:700px">
+      
+      <h1 style="margin: 20px 0 0; font-size: 84px; line-height: .94; font-weight: 900; letter-spacing: -.03em; color: #0094F3">{{ t.svcTitle }}</h1>
+      <p style="margin:26px 0 0;font-size:19px;line-height:1.6;font-weight:300;color:#9c9ca6;text-wrap:pretty">{{ t.svcSub }}</p>
+    </div>
+
+    <div style="margin-top:64px;display:grid;grid-template-columns:1fr 1fr;gap:20px">
+      <sc-for list="{{ pillars }}" as="p" hint-placeholder-count="4">
+        <div style="border:1px solid rgba(255,255,255,.08);border-radius:20px;background:linear-gradient(#0c0c11,#0a0a0e);padding:40px;display:flex;flex-direction:column;gap:22px;min-height:340px;transition:border-color .3s ease,transform .3s ease" style-hover="border-color:rgba(255,255,255,.22);transform:translateY(-4px)">
+          <div style="display:flex;align-items:center;justify-content:space-between">
+            <span style="font-family:'Roboto Mono',monospace;font-size:12px;letter-spacing:.24em;color:#5e5e6a">{{ p.num }}</span>
+            <span style="width:10px;height:10px;border-radius:2px;background:{{ p.color }};box-shadow:0 0 16px {{ p.color }}"></span>
+          </div>
+          <div>
+            <h3 style="margin:0;font-size:30px;line-height:1.15;font-weight:700;letter-spacing:-.02em">{{ p.title }}</h3>
+            <p style="margin:14px 0 0;font-size:15px;line-height:1.65;font-weight:300;color:#93939e;text-wrap:pretty">{{ p.body }}</p>
+          </div>
+          <div style="margin-top:auto;display:flex;flex-wrap:wrap;gap:8px">
+            <sc-for list="{{ p.tags }}" as="tag" hint-placeholder-count="3">
+              <span style="font-family:'Roboto Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#a8a8b2;border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:7px 12px">{{ tag }}</span>
+            </sc-for>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+  </sc-if>
+
+  <!-- ============ PORTFOLIO ============ -->
+  <sc-if value="{{ isPortfolio }}">
+  <div style="max-width:1280px;margin:0 auto;padding:96px 40px 120px">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:48px;flex-wrap:wrap">
+      <div style="max-width:660px">
+        
+        <h1 style="margin: 20px 0 0; font-size: 84px; line-height: .94; font-weight: 900; letter-spacing: -.03em; color: #FD6A24">{{ t.portTitle }}</h1>
+        <p style="margin:26px 0 0;font-size:19px;line-height:1.6;font-weight:300;color:#9c9ca6;text-wrap:pretty">{{ t.portSub }}</p>
+      </div>
+      
+    </div>
+
+    <div style="margin-top:60px;display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid rgba(255,255,255,.08);border-left:1px solid rgba(255,255,255,.08)">
+      <sc-for list="{{ clients }}" as="c" hint-placeholder-count="12">
+        <div style="position:relative;border-right:1px solid rgba(255,255,255,.08);border-bottom:1px solid rgba(255,255,255,.08);height:170px;display:grid;place-items:center;padding:24px;background:#08080b;transition:background .3s ease" style-hover="background:#0d0d13">
+          <div style="{{ c.wrap }}" style-hover="{{ c.wrapHover }}">
+            <image-slot id="{{ c.id }}" shape="rect" style="width:100%;height:100%" fit="contain" placeholder="{{ c.name }}"></image-slot>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+  </sc-if>
+
+  <!-- ============ CONTACT ============ -->
+  <sc-if value="{{ isContact }}">
+  <div style="max-width:1280px;margin:0 auto;padding:96px 40px 120px">
+    <div style="display:grid;grid-template-columns:1fr 1.05fr;gap:88px;align-items:start">
+
+      <div>
+        
+        <h1 style="margin:20px 0 0;font-size:76px;line-height:.94;font-weight:900;letter-spacing:-.03em">{{ t.conTitle }}</h1>
+        <p style="margin:24px 0 0;font-size:18px;line-height:1.6;font-weight:300;color:#9c9ca6;text-wrap:pretty">{{ t.conSub }}</p>
+
+        <div style="margin-top:56px;display:flex;flex-direction:column;gap:28px">
+          <div>
+            <div style="font-family:'Roboto Mono',monospace;font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:#5e5e6a">{{ t.phone }}</div>
+            <div style="margin-top:12px;display:flex;flex-direction:column;gap:6px">
+              <a href="tel:078320230" style="font-size:44px;font-weight:700;letter-spacing:-.02em;line-height:1.1" style-hover="color:oklch(0.72 0.17 245)">078 320 230</a>
+              <a href="tel:070223286" style="font-size:44px;font-weight:700;letter-spacing:-.02em;line-height:1.1" style-hover="color:oklch(0.72 0.17 245)">070 223 286</a>
+            </div>
+          </div>
+          <div>
+            <div style="font-family:'Roboto Mono',monospace;font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:#5e5e6a">Email</div>
+            <a href="mailto:info@lightboxmedia.mk" style="display:inline-block;margin-top:12px;font-size:30px;font-weight:500;letter-spacing:-.01em" style-hover="color:oklch(0.72 0.17 55)">info@lightboxmedia.mk</a>
+          </div>
+        </div>
+      </div>
+
+      <div style="border:1px solid rgba(255,255,255,.1);border-radius:22px;background:linear-gradient(150deg, rgba(255,255,255,.055), rgba(255,255,255,.015));backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);padding:44px">
+        <sc-if value="{{ sent }}">
+          <div style="min-height:520px;display:grid;place-items:center;text-align:center">
+            <div>
+              <div style="width:16px;height:16px;margin:0 auto;border-radius:3px;background:oklch(0.72 0.17 145);box-shadow:0 0 26px oklch(0.72 0.17 145 / .9)"></div>
+              <div style="margin-top:26px;font-size:28px;font-weight:700;letter-spacing:-.01em">{{ t.sentTitle }}</div>
+              <div style="margin-top:12px;font-size:15px;font-weight:300;color:#9c9ca6">{{ t.sentBody }}</div>
+            </div>
+          </div>
+        </sc-if>
+        <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
+        <form onSubmit="{{ submit }}" style="display:flex;flex-direction:column;gap:20px">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+            <label style="display:flex;flex-direction:column;gap:9px">
+              <span style="font-family:'Roboto Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#7b7b86">{{ t.fName }}</span>
+              <input type="text" style="background:rgba(7,7,10,.6);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:14px 15px;color:#fff;font-size:15px;outline:none" style-focus="border-color:oklch(0.72 0.17 245 / .7)">
+            </label>
+            <label style="display:flex;flex-direction:column;gap:9px">
+              <span style="font-family:'Roboto Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#7b7b86">{{ t.fCompany }}</span>
+              <input type="text" style="background:rgba(7,7,10,.6);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:14px 15px;color:#fff;font-size:15px;outline:none" style-focus="border-color:oklch(0.72 0.17 245 / .7)">
+            </label>
+            <label style="display:flex;flex-direction:column;gap:9px">
+              <span style="font-family:'Roboto Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#7b7b86">Email</span>
+              <input type="email" style="background:rgba(7,7,10,.6);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:14px 15px;color:#fff;font-size:15px;outline:none" style-focus="border-color:oklch(0.72 0.17 245 / .7)">
+            </label>
+            <label style="display:flex;flex-direction:column;gap:9px">
+              <span style="font-family:'Roboto Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#7b7b86">{{ t.fPhone }}</span>
+              <input type="tel" style="background:rgba(7,7,10,.6);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:14px 15px;color:#fff;font-size:15px;outline:none" style-focus="border-color:oklch(0.72 0.17 245 / .7)">
+            </label>
+          </div>
+          <label style="display:flex;flex-direction:column;gap:9px">
+            <span style="font-family:'Roboto Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#7b7b86">{{ t.fLocation }}</span>
+            <select style="background:rgba(7,7,10,.6);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:14px 15px;color:#fff;font-size:15px;outline:none" style-focus="border-color:oklch(0.72 0.17 245 / .7)">
+              <option>Скопје — Аеродром (50 m²)</option>
+              <option>Охрид — Центар (40 m²)</option>
+              <option>Гевгелија (2 × 15 m²)</option>
+              <option>{{ t.optAll }}</option>
+            </select>
+          </label>
+          <label style="display:flex;flex-direction:column;gap:9px">
+            <span style="font-family:'Roboto Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#7b7b86">{{ t.fMessage }}</span>
+            <textarea rows="4" style="background:rgba(7,7,10,.6);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:14px 15px;color:#fff;font-size:15px;outline:none;resize:vertical" style-focus="border-color:oklch(0.72 0.17 245 / .7)"></textarea>
+          </label>
+          <button type="submit" style="margin-top: 6px; color: #07070a; border: 0; border-radius: 999px; padding: 17px 24px; font-size: 14px; font-weight: 700; letter-spacing: .04em; cursor: pointer; transition: box-shadow .3s ease,transform .3s ease; background-color: #0ABA02; text-transform: uppercase" style-hover="box-shadow:0 10px 40px rgba(255,255,255,.24);transform:translateY(-1px)">{{ t.submit }}</button>
+          <div style="font-size:12px;line-height:1.6;color:#65656f;font-weight:300">{{ t.formNote }}</div>
+        </form>
+        </sc-if>
+      </div>
+    </div>
+  </div>
+  </sc-if>
+
+  <!-- FOOTER -->
+  <div style="border-top:1px solid rgba(255,255,255,.07)">
+    <div style="max-width:1280px;margin:0 auto;padding:40px;display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap">
+      <img src="assets/logo-white.png" alt="Lightbox Media" style="height:56px;width:auto;display:block;opacity:.85">
+      <div style="font-family:'Roboto Mono',monospace;font-size:11px;letter-spacing:.14em;color:#5e5e6a">info@lightboxmedia.mk · 078 320 230 · 070 223 286</div>
+      <div style="font-family:'Roboto Mono',monospace;font-size:11px;letter-spacing:.14em;color:#3f3f48">© 2026</div>
+    </div>
+  </div>
+</div>
+
+  <sc-if value="{{ hasVideo }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeVideo }}" style="position:fixed;inset:0;z-index:200;background:rgba(4,4,6,.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);display:grid;place-items:center;padding:48px">
+      <div onClick="{{ stop }}" style="width:min(1120px, 92vw, calc((100dvh - 190px) * 16 / 9));max-height:100%;display:flex;flex-direction:column;gap:14px">
+        <div style="display:flex;align-items:baseline;justify-content:space-between;gap:24px">
+          <div style="font-size:22px;font-weight:700;letter-spacing:-.01em;color:#fff">{{ videoTitle }}</div>
+          <button onClick="{{ closeVideo }}" style="background:transparent;border:1px solid rgba(255,255,255,.2);border-radius:999px;width:38px;height:38px;cursor:pointer;color:#c8c8d0;font-size:15px;line-height:1;flex:0 0 auto" style-hover="border-color:rgba(255,255,255,.5);color:#fff">✕</button>
+        </div>
+        <div style="position:relative;aspect-ratio:16 / 9;border-radius:18px;overflow:hidden;background:#000;border:1px solid rgba(255,255,255,.12);box-shadow:0 40px 120px rgba(0,0,0,.7)">{{ videoFrame }}</div>
+        <a href="{{ videoUrl }}" target="_blank" rel="noopener" style="font-family:'Roboto Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#6d6d78" style-hover="color:#0ABA02">{{ openOnYt }} ↗</a>
+      </div>
+    </div>
+  </sc-if>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:980},&quot;defaultLang&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;MK&quot;,&quot;EN&quot;],&quot;default&quot;:&quot;MK&quot;,&quot;tsType&quot;:&quot;\&quot;MK\&quot; | \&quot;EN\&quot;&quot;},&quot;showVip&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;},&quot;revealLogos&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Portfolio&quot;}}">
+const COPY = {
+  MK: {
+    homeEyebrow: "ЛЕД билборд мрежа · Македонија",
+    homeTitle: "Мрежа на ЛЕД билборди: Скопје, Охрид и Гевгелија",
+    homeSub: "Стратешки позиции со највисока фреквенција на сообраќај и видливост во Македонија.",
+    ctaBook: "Резервирај термин", ctaLocations: "Види локации",
+    reachLong: "Месечен досег на публика во мрежата",
+    seeAll: "Види сè", trustedBy: "Клиенти што ни веруваат",
+    homeCta: "Резервирајте го вашиот термин уште денес.",
+    locEyebrow: "DOOH мрежа", locTitle: "Локации",
+    locSub: "Стратешки позиции со највисока фреквенција на сообраќај и видливост во Македонија. Одлична видливост за пешаци и возачи, присуство во секојдневната рутина на локалното население.",
+    mapNote: "Поминете со курсорот над локација",
+    play: "Прикажи видео",
+    dropVideo: "Довлечете видео файл тука за преглед",
+    showreel: "Шоурил",
+    showreelLine: "Вашата реклама, во највисока резолуција, на најфреквентните точки во земјата.",
+    addr1: "Катна гаража Илинден – ТЦ Бисер, Аеродром",
+    addr2: "Охрид Центар – Главен Кружен Тек",
+    addr3: "Градски Плоштад · Булевар – Кружен Тек",
+    card1: "Најголемата општина во Скопје нуди неверојатна фреквенција на возила и пешаци. Со големина од 50 m² овој ЛЕД билборд е идеален за брендови за широка потрошувачка.",
+    card2: "Секој ден низ центарот на Охрид поминуваат илјадници луѓе — туристи, локалци, бизнисмени, младина. Ова не е „една од многуте“ реклами.",
+    card3: "Два екрана од 15 m² на најфреквентните точки во градот: директно на градскиот плоштад и до кружниот тек на булеварот, низ кој поминуваат илјадници транзитни патници.",
+    reach: "Месечен досег", screens: "LED екрани во мрежа", airtime: "Дневно емитување",
+    vipTitle: "VIP ексклузивитет за вашата индустрија",
+    vipBody: "Затвораме цела индустриска категорија на екранот — вашиот бренд е единствениот глас во неа, на секоја локација што ќе ја резервирате.",
+    premium: "Доплата на цената",
+
+    svcEyebrow: "Услуги", svcTitle: "Услуги",
+    svcSub: "Физичка DOOH инфраструктура и целосен дигитален маркетинг под еден покрив — од идеја и продукција до мерење на резултати.",
+
+    portEyebrow: "Клиенти", portTitle: "Портфолио",
+    portSub: "Брендови, институции и спортски клубови што редовно емитуваат на нашата мрежа.",
+    hoverHint: "Поминете со курсорот за боја",
+
+    conEyebrow: "Контакт", conTitle: "Контакт",
+    conSub: "Резервирајте го вашиот термин уште денес. Опишете ја кампањата во неколку реда. Одговараме со достапни термини, цени и предлог за распоред на емитување во рок од 24 часа.",
+    phone: "Телефон",
+    fName: "Име и презиме", fCompany: "Компанија", fPhone: "Телефон",
+    fLocation: "Локација од интерес", fMessage: "Кратко за кампањата",
+    optAll: "Целата мрежа", submit: "Испрати барање",
+    formNote: "Барањето оди директно во нашиот CRM. Без обврска и без автоматски маркетинг пораки.",
+    sentTitle: "Барањето е испратено", sentBody: "Ве контактираме во рок од 24 часа."
+  },
+  EN: {
+    homeEyebrow: "LED billboard network · Macedonia",
+    homeTitle: "A network of LED billboards: Skopje, Ohrid and Gevgelija",
+    homeSub: "Strategic positions with the highest traffic frequency and visibility in Macedonia, plus full marketing production under one roof.",
+    ctaBook: "Book a slot", ctaLocations: "View locations",
+    reachLong: "Monthly audience reach across the network",
+    seeAll: "See all", trustedBy: "Trusted by",
+    homeCta: "Book your slot today.",
+    locEyebrow: "DOOH network", locTitle: "Locations",
+    locSub: "Strategic positions with the highest traffic frequency and visibility in Macedonia. Excellent visibility for pedestrians and drivers, present in the daily routine of the local population.",
+    mapNote: "Hover a location",
+    play: "Play preview",
+    dropVideo: "Drop a video file here to preview",
+    showreel: "Showreel",
+    showreelLine: "Your advert, at full resolution, on the busiest points in the country.",
+    addr1: "Ilinden parking garage – TC Biser, Aerodrom",
+    addr2: "Ohrid centre – main roundabout",
+    addr3: "City square · Boulevard roundabout",
+    card1: "The largest municipality in Skopje delivers exceptional vehicle and pedestrian frequency. At 50 m², this LED billboard is ideal for mass consumer brands.",
+    card2: "Thousands of people pass through central Ohrid every day — tourists, locals, business people, youth. This is not one ad among many.",
+    card3: "Two 15 m² screens on the busiest points in town: directly on the city square and by the boulevard roundabout, crossed daily by thousands of transit travellers.",
+    reach: "Monthly reach", screens: "LED screens in network", airtime: "Daily airtime",
+    vipTitle: "VIP exclusivity for your industry",
+    vipBody: "We close an entire industry category on the screen — your brand is its only voice, on every location you book.",
+    premium: "Price surcharge",
+
+    svcEyebrow: "Services", svcTitle: "Services",
+    svcSub: "Physical DOOH infrastructure and full-stack digital marketing under one roof — from concept and production to measured results.",
+
+    portEyebrow: "Clients", portTitle: "Portfolio",
+    portSub: "Brands, institutions and sports clubs broadcasting regularly across our network.",
+    hoverHint: "Hover to illuminate",
+
+    conEyebrow: "Contact", conTitle: "Contact",
+    conSub: "Describe the campaign in a few lines. We reply with available slots, pricing and a proposed broadcast schedule within 24 hours.",
+    phone: "Phone",
+    fName: "Full name", fCompany: "Company", fPhone: "Phone",
+    fLocation: "Location of interest", fMessage: "About the campaign",
+    optAll: "Entire network", submit: "Send inquiry",
+    formNote: "Inquiries land straight in our CRM. No obligation and no automated marketing mail.",
+    sentTitle: "Inquiry sent", sentBody: "We will get back to you within 24 hours."
+  }
+};
+
+const BENEFITS = {
+  MK: [
+    { color: "oklch(0.72 0.17 245)", text: "Одлична видливост за пешаци и возачи" },
+    { color: "oklch(0.72 0.17 55)", text: "Присуство во секојдневната рутина на локалното население" },
+    { color: "oklch(0.72 0.17 145)", text: "Идеален за брендирање, кампањи, промоции, понуди и настани" },
+    { color: "oklch(0.72 0.17 245)", text: "Висок домет на експонираност — месечен досег од над 1.000.000 луѓе" }
+  ],
+  EN: [
+    { color: "oklch(0.72 0.17 245)", text: "Excellent visibility for pedestrians and drivers" },
+    { color: "oklch(0.72 0.17 55)", text: "Present in the daily routine of the local population" },
+    { color: "oklch(0.72 0.17 145)", text: "Ideal for branding, campaigns, promotions, offers and events" },
+    { color: "oklch(0.72 0.17 245)", text: "High exposure — a monthly reach of over 1,000,000 people" }
+  ]
+};
+
+const NET = {
+  MK: [
+    { city: "Скопје", addr: "Катна гаража Илинден – ТЦ Бисер, Аеродром", size: "50 m²", color: "oklch(0.72 0.17 245)" },
+    { city: "Охрид", addr: "Центар – Главен кружен тек", size: "40 m²", color: "oklch(0.72 0.17 55)" },
+    { city: "Гевгелија", addr: "Градски плоштад · Булевар – кружен тек", size: "2 × 15 m²", color: "oklch(0.72 0.17 145)" }
+  ],
+  EN: [
+    { city: "Skopje", addr: "Ilinden parking garage – TC Biser, Aerodrom", size: "50 m²", color: "oklch(0.72 0.17 245)" },
+    { city: "Ohrid", addr: "Centre – main roundabout", size: "40 m²", color: "oklch(0.72 0.17 55)" },
+    { city: "Gevgelija", addr: "City square · Boulevard roundabout", size: "2 × 15 m²", color: "oklch(0.72 0.17 145)" }
+  ]
+};
+
+const VIP = {
+  MK: [
+    { title: "Без Конкуренција", body: "Гарантираме дека ниту еден ваш директен конкурент нема да се појави на екранот." },
+    { title: "Премиум Статус", body: "Вашиот бренд станува единствен претставник на својата индустрија во нашата мрежа." },
+    { title: "Достапност", body: "Опцијата е достапна за долгорочни договори со доплата од +40%." }
+  ],
+  EN: [
+    { title: "No competition", body: "We guarantee that no direct competitor of yours will appear on the screen." },
+    { title: "Premium status", body: "Your brand becomes the sole representative of its industry across our network." },
+    { title: "Availability", body: "Available on long-term contracts with a +40% surcharge." }
+  ]
+};
+
+const PILLARS = {
+  MK: [
+    { num: "01", color: "oklch(0.72 0.17 245)", title: "ЛЕД Огласување", body: "Емитување на сопствена мрежа од висококвалитетни LED екрани, со контрола на фрекфенција, часовни зони и должина на спот.", tags: ["Планирање", "Спот ротации", "Извештаи", "VIP ексклузивитет"] },
+    { num: "02", color: "oklch(0.72 0.17 55)", title: "Маркетинг Услуги", body: "Целосно водење на дигитални кампањи — поставување, оптимизација и мерење. Google Analytics 4 интеграција со чисто следење на конверзии.", tags: ["Google Analytics 4", "Meta & Google Ads", "Водење кампањи", "Social media"] },
+    { num: "03", color: "oklch(0.72 0.17 145)", title: "Фото и Видео", body: "Продукција и постпродукција на фотографии и видеа, до генеративно AI видео и композитинг за формати наменети за LED.", tags: ["After Effects", "Illustrator", "Veo 3.1", "Midjourney", "Композитинг"] },
+    { num: "04", color: "oklch(0.72 0.17 245)", title: "Маркетинг Консалтинг", body: "Стратегиско планирање, навигација низ јавни набавки и подготовка на спонзорски предлози што поминуваат на прв круг.", tags: ["Стратегија", "Јавни набавки", "Спонзорства", "Буџетирање"] }
+  ],
+  EN: [
+    { num: "01", color: "oklch(0.72 0.17 245)", title: "LED Advertising", body: "Broadcasting on our own network of high-resolution LED screens, with control over frequency, dayparts and spot length.", tags: ["Planning", "Spot rotation", "Reporting", "VIP exclusivity"] },
+    { num: "02", color: "oklch(0.72 0.17 55)", title: "Marketing Services", body: "Full-stack digital campaign management — setup, optimisation and measurement. Google Analytics 4 integration with clean conversion tracking.", tags: ["Google Analytics 4", "Meta & Google Ads", "Campaign management", "Social media"] },
+    { num: "03", color: "oklch(0.72 0.17 145)", title: "Photo & Video Creation", body: "Production and post from Adobe After Effects and Illustrator through to generative AI video and compositing for LED-native formats.", tags: ["After Effects", "Illustrator", "Veo 3.1", "Midjourney", "Compositing"] },
+    { num: "04", color: "oklch(0.72 0.17 245)", title: "Marketing Consulting", body: "Strategic planning, public procurement navigation and sponsorship proposals that clear the first round.", tags: ["Strategy", "Public procurement", "Sponsorships", "Budgeting"] }
+  ]
+};
+
+const CLIENTS = [
+  { name: "State Video Lottery", hue: 245 },
+  { name: "RK Vardar 1961", hue: 55 },
+  { name: "MTEL", hue: 145 },
+  { name: "Клиент 04", hue: 245 },
+  { name: "Клиент 05", hue: 55 },
+  { name: "Клиент 06", hue: 145 },
+  { name: "Клиент 07", hue: 245 },
+  { name: "Клиент 08", hue: 55 },
+  { name: "Клиент 09", hue: 145 },
+  { name: "Клиент 10", hue: 245 },
+  { name: "Клиент 11", hue: 55 },
+  { name: "Клиент 12", hue: 145 }
+];
+
+const VIDEOS = {
+  homeHero: "assets/hero.mp4",
+  hero: "assets/showreel.mp4",
+  skopje: "assets/skopje.mp4",
+  ohrid: "assets/ohrid.mp4",
+  gev: "assets/gevgelija.mp4"
+};
+
+class Component extends DCLogic {
+  state = { page: "home", lang: null, sent: false, pin: null, vids: {}, video: null };
+
+  openVideo = (id, title) => (e) => {
+    if (e) { e.preventDefault(); e.stopPropagation(); }
+    this.setState({ video: { id: id, title: title } });
+  };
+
+  frame = (id) =>
+    React.createElement("iframe", {
+      src: "https://www.youtube-nocookie.com/embed/" + id + "?autoplay=1&rel=0&modestbranding=1&playsinline=1",
+      title: "video",
+      allow: "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share",
+      allowFullScreen: true,
+      referrerPolicy: "strict-origin-when-cross-origin",
+      style: { position: "absolute", inset: 0, width: "100%", height: "100%", border: 0 }
+    });
+
+  // VIDEOS holds the intended asset paths; once the real files land in assets/
+  // seed them into `vids` here and the placeholders swap out.
+
+  drop = (key) => (e) => {
+    e.preventDefault();
+    const f = e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0];
+    if (!f || !f.type.startsWith("video")) return;
+    const url = URL.createObjectURL(f);
+    this.setState((s) => ({ vids: Object.assign({}, s.vids, { [key]: url }) }));
+  };
+
+  player = (src, auto) => {
+    if (!src) return null;
+    return React.createElement("video", {
+      src: src, autoPlay: auto, loop: true, muted: true, playsInline: true,
+      style: { position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }
+    });
+  };
+
+  pop = (on, dir) => ({
+    pointerEvents: on ? "auto" : "none",
+    opacity: on ? 1 : 0,
+    transform: on ? "translateY(0)" : "translateY(" + (dir === "up" ? "8px" : "-8px") + ")",
+    transition: "opacity .28s ease, transform .28s ease"
+  });
+
+  get lang() { return this.state.lang || this.props.defaultLang || "MK"; }
+
+  go = (page) => (e) => { if (e) e.preventDefault(); this.setState({ page }); window.scrollTo(0, 0); };
+
+  renderVals() {
+    const lang = this.lang;
+    const mk = lang === "MK";
+    const layer = (on) => ({ gridArea: "1 / 1", transition: "opacity .38s ease", opacity: on ? 1 : 0, pointerEvents: on ? "auto" : "none", whiteSpace: "nowrap" });
+    const reveal = this.props.revealLogos === true;
+
+    return {
+      t: COPY[lang],
+      pillars: PILLARS[lang],
+      vipPoints: VIP[lang],
+      benefits: BENEFITS[lang],
+      homeNet: NET[lang],
+      homeLogos: [1, 2, 3, 4, 5].map((n) => ({
+        id: "home-logo-" + n,
+        wrap: { width: 120, height: 56, filter: reveal ? "none" : "grayscale(1) brightness(.72)", opacity: reveal ? 1 : 0.7, transition: "filter .4s ease, opacity .4s ease" },
+        wrapHover: { filter: "none", opacity: 1 }
+      })),
+      isHome: this.state.page === "home",
+      goHome: this.go("home"),
+      clients: CLIENTS.map((c, i) => ({
+        name: c.name,
+        id: "logo-" + (i + 1),
+        wrap: {
+          width: "100%",
+          height: "100%",
+          filter: reveal ? "none" : "grayscale(1) brightness(.72)",
+          opacity: reveal ? 1 : 0.72,
+          transition: "filter .4s ease, opacity .4s ease"
+        },
+        wrapHover: { filter: "none", opacity: 1 }
+      })),
+      mkText: layer(mk),
+      enText: layer(!mk),
+      mkPill: { color: mk ? "#ffffff" : "#5c5c66", transition: "color .3s ease" },
+      enPill: { color: mk ? "#5c5c66" : "#ffffff", transition: "color .3s ease" },
+      isLocations: this.state.page === "locations",
+      isServices: this.state.page === "services",
+      isPortfolio: this.state.page === "portfolio",
+      isContact: this.state.page === "contact",
+      showVip: this.props.showVip !== false,
+      sent: this.state.sent,
+      notSent: !this.state.sent,
+      goLocations: this.go("locations"),
+      goServices: this.go("services"),
+      goPortfolio: this.go("portfolio"),
+      goContact: this.go("contact"),
+      noHeroVideo: !this.state.vids.hero,
+      dragOver: (e) => e.preventDefault(),
+      homeHeroPlayer: this.player(this.state.vids.homeHero, true),
+      heroPlayer: this.player(this.state.vids.hero, true),
+      skopjePlayer: this.player(this.state.vids.skopje, false),
+      ohridPlayer: this.player(this.state.vids.ohrid, false),
+      gevPlayer: this.player(this.state.vids.gev, false),
+      noHomeHeroVideo: !this.state.vids.homeHero,
+      dropHomeHero: this.drop("homeHero"),
+      dropHero: this.drop("hero"),
+      dropSkopje: this.drop("skopje"),
+      dropOhrid: this.drop("ohrid"),
+      dropGev: this.drop("gev"),
+      hoverPlay: (e) => { const v = e.currentTarget.querySelector("video"); if (v && v.src) v.play().catch(() => {}); },
+      hoverPause: (e) => { const v = e.currentTarget.querySelector("video"); if (v) v.pause(); },
+      enterSkopje: () => this.setState({ pin: "skopje" }),
+      enterOhrid: () => this.setState({ pin: "ohrid" }),
+      enterGev: () => this.setState({ pin: "gev" }),
+      leavePin: () => this.setState({ pin: null }),
+      popSkopje: this.pop(this.state.pin === "skopje", "down"),
+      popOhrid: this.pop(this.state.pin === "ohrid", "up"),
+      popGev: this.pop(this.state.pin === "gev", "up"),
+      hasVideo: !!this.state.video,
+      videoTitle: this.state.video ? this.state.video.title : "",
+      videoUrl: this.state.video ? "https://www.youtube.com/watch?v=" + this.state.video.id : "#",
+      videoFrame: this.state.video ? this.frame(this.state.video.id) : null,
+      openSkopje: this.openVideo("a0LOYsoLJPA", mk ? "Скопје — Аеродром" : "Skopje — Aerodrom"),
+      openOhrid: this.openVideo("Pv317kdpnAE", mk ? "Охрид — Центар" : "Ohrid — Centre"),
+      closeVideo: () => this.setState({ video: null }),
+      stop: (e) => e.stopPropagation(),
+      openOnYt: mk ? "Отвори на YouTube" : "Open on YouTube",
+      toggleLang: () => this.setState({ lang: mk ? "EN" : "MK" }),
+      submit: (e) => { e.preventDefault(); this.setState({ sent: true }); }
+    };
+  }
+}
+</script>
+</body>
+</html>
