@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="mk" data-lang="MK" data-page="home">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lightbox Media — LED билборд мрежа во Македонија</title>
+<meta name="description" content="Lightbox Media — премиум ЛЕД билборд мрежа и дигитален маркетинг во Скопје, Охрид и Гевгелија.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&family=Roboto+Mono:wght@400;500&display=swap&subset=latin,cyrillic" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- NAV -->
+<header class="nav">
+  <div class="nav-inner">
+    <a href="#/" class="nav-logo" data-goto="home">
+      <img src="assets/logo-white.png" alt="Lightbox Media" height="46">
+    </a>
+
+    <nav class="nav-links" id="navLinks">
+      <a href="#/" data-goto="home" class="nav-link"><span class="lang-mk">Дома</span><span class="lang-en">Home</span></a>
+      <a href="#/locations" data-goto="locations" class="nav-link"><span class="lang-mk">Локации</span><span class="lang-en">Locations</span></a>
+      <a href="#/services" data-goto="services" class="nav-link"><span class="lang-mk">Услуги</span><span class="lang-en">Services</span></a>
+      <a href="#/portfolio" data-goto="portfolio" class="nav-link"><span class="lang-mk">Портфолио</span><span class="lang-en">Portfolio</span></a>
+      <a href="#/contact" data-goto="contact" class="nav-link"><span class="lang-mk">Контакт</span><span class="lang-en">Contact</span></a>
+    </nav>
+
+    <div class="nav-actions">
+      <button type="button" class="lang-toggle" id="langToggle" aria-label="Switch language">
+        <span class="mk-pill">MK</span><span class="pill-sep">|</span><span class="en-pill">EN</span>
+      </button>
+      <button type="button" class="btn btn-cta" data-goto="contact">
+        <span class="lang-mk">Резервирај</span><span class="lang-en">Book now</span>
+      </button>
+      <button type="button" class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false" aria-controls="navLinks">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- ============ HOME ============ -->
+  <section id="page-home" class="page">
+    <!-- HERO -->
+    <div class="hero">
+      <div class="hero-bg">
+        <img src="assets/img/hero.webp" alt="" class="hero-bg-img">
+      </div>
+      <div class="hero-scrim"></div>
+      <div class="hero-gradient"></div>
+      <div class="hero-content">
+        <div class="eyebrow eyebrow-green" data-i18n="homeEyebrow"></div>
+        <h1 class="hero-title" data-i18n="homeTitle"></h1>
+        <p class="hero-sub" data-i18n="homeSub"></p>
+        <div class="hero-ctas">
+          <button type="button" class="btn btn-cta" data-goto="contact" data-i18n="ctaBook"></button>
+          <button type="button" class="btn btn-outline" data-goto="locations" data-i18n="ctaLocations"></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- BENEFITS -->
+    <div class="wrap section-top">
+      <div class="benefits-grid" id="homeBenefits"></div>
+    </div>
+
+    <!-- MAP -->
+    <div class="wrap section-top">
+      <div class="map-panel">
+        <div class="map-grid"></div>
+        <div class="map-inner">
+          <div class="pin pin-skopje" style="top:24%;left:53%" tabindex="0" data-pin="skopje">
+            <div class="pin-pop pin-pop-skopje">
+              <div class="pin-pop-card pin-pop-fade">
+                <div class="pin-pop-card-inner">
+                  <img src="assets/img/pin-skopje.webp" alt="Скопје — фото на екранот" class="pin-pop-img">
+                  <div class="pin-pop-body">
+                    <div class="pin-pop-title">Скопје — Аеродром</div>
+                    <div class="pin-pop-meta">50 m² · ТЦ Бисер</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <span class="pin-dot pin-dot-blue"><span class="pin-pulse pin-pulse-blue"></span></span>
+            <div class="pin-label">
+              <div class="pin-label-title">Скопје</div>
+              <div class="pin-label-meta">50 m² · ТЦ БИСЕР, АЕРОДРОМ</div>
+            </div>
+          </div>
+
+          <div class="pin pin-ohrid" style="top:63%;left:20%" tabindex="0" data-pin="ohrid">
+            <div class="pin-pop pin-pop-ohrid">
+              <div class="pin-pop-card pin-pop-fade pin-pop-fade-up">
+                <div class="pin-pop-card-inner">
+                  <img src="assets/img/pin-ohrid.webp" alt="Охрид — фото на екранот" class="pin-pop-img">
+                  <div class="pin-pop-body">
+                    <div class="pin-pop-title">Охрид — Центар</div>
+                    <div class="pin-pop-meta">40 m² · Главен кружен тек</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <span class="pin-dot pin-dot-orange"><span class="pin-pulse pin-pulse-orange"></span></span>
+            <div class="pin-label">
+              <div class="pin-label-title">Охрид</div>
+              <div class="pin-label-meta">40 m² · ГЛАВЕН КРУЖЕН ТЕК</div>
+            </div>
+          </div>
+
+          <div class="pin pin-gev" style="top:82%;left:60%" tabindex="0" data-pin="gev">
+            <div class="pin-pop pin-pop-gev">
+              <div class="pin-pop-grid pin-pop-fade pin-pop-fade-up">
+                <div class="pin-pop-card">
+                  <div class="pin-pop-card-inner">
+                    <img src="assets/img/pin-gev-plostad.webp" alt="Плоштад — фото" class="pin-pop-img pin-pop-img-sm">
+                    <div class="pin-pop-body pin-pop-body-sm">
+                      <div class="pin-pop-title pin-pop-title-sm">Гевгелија — Плоштад</div>
+                      <div class="pin-pop-meta">15 m²</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="pin-pop-card">
+                  <div class="pin-pop-card-inner">
+                    <img src="assets/img/pin-gev-bulevar.webp" alt="Булевар — фото" class="pin-pop-img pin-pop-img-sm">
+                    <div class="pin-pop-body pin-pop-body-sm">
+                      <div class="pin-pop-title pin-pop-title-sm">Гевгелија — Булевар</div>
+                      <div class="pin-pop-meta">15 m² · Кружен тек</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <span class="pin-dot pin-dot-green"><span class="pin-pulse pin-pulse-green"></span></span>
+            <div class="pin-label">
+              <div class="pin-label-title">Гевгелија</div>
+              <div class="pin-label-meta">2 × 15 m² · ПЛОШТАД + БУЛЕВАР</div>
+            </div>
+          </div>
+
+          <div class="map-note" data-i18n="mapNote"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- REACH -->
+    <div class="wrap section-top section-bottom">
+      <div class="reach-grid">
+        <div>
+          <div class="reach-number">1.000.000+</div>
+          <div class="reach-caption" data-i18n="reachLong"></div>
+        </div>
+        <div class="reach-net" id="homeNet"></div>
+      </div>
+    </div>
+
+    <!-- CLIENTS STRIP -->
+    <div class="clients-strip">
+      <div class="wrap clients-strip-inner">
+        <div class="mono-label" data-i18n="trustedBy"></div>
+        <div class="clients-logos" id="homeLogos"></div>
+        <a href="#/portfolio" data-goto="portfolio" class="see-all"><span data-i18n="seeAll"></span> →</a>
+      </div>
+    </div>
+
+    <!-- CTA BAND -->
+    <div class="wrap section-top section-bottom-lg">
+      <div class="cta-band">
+        <div class="cta-band-glow"></div>
+        <div class="cta-band-inner">
+          <div>
+            <h2 class="cta-band-title" data-i18n="homeCta"></h2>
+            <div class="cta-band-contacts">
+              <a href="tel:078320230" class="contact-link-blue">078 320 230</a>
+              <a href="tel:070223286">070 223 286</a>
+              <a href="mailto:info@lightboxmedia.mk" class="contact-link-green">info@lightboxmedia.mk</a>
+            </div>
+          </div>
+          <button type="button" class="btn btn-cta" data-goto="contact" data-i18n="ctaBook"></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ LOCATIONS ============ -->
+  <section id="page-locations" class="page" hidden>
+  <div class="wrap page-pad">
+
+    <div class="page-header">
+      <div class="page-header-copy">
+        <h1 class="page-title title-green" data-i18n="locTitle"></h1>
+        <p class="page-sub" data-i18n="locSub"></p>
+      </div>
+      <div class="page-header-tags mono-label">
+        <span>Скопје</span><span class="sep">/</span><span>Охрид</span><span class="sep">/</span><span>Гевгелија</span>
+      </div>
+    </div>
+
+    <!-- MAP -->
+    <div class="map-panel section-top-sm">
+      <div class="map-grid"></div>
+      <div class="map-inner">
+        <div class="pin pin-skopje" style="top:24%;left:53%" tabindex="0" data-pin="skopje">
+          <div class="pin-pop pin-pop-skopje">
+            <div class="pin-pop-card pin-pop-fade">
+              <div class="pin-pop-card-inner">
+                <img src="assets/img/pin-skopje.webp" alt="Скопје — фото на екранот" class="pin-pop-img">
+                <div class="pin-pop-body">
+                  <div class="pin-pop-title">Скопје — Аеродром</div>
+                  <div class="pin-pop-meta">50 m² · ТЦ Бисер</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <span class="pin-dot pin-dot-blue"><span class="pin-pulse pin-pulse-blue"></span></span>
+          <div class="pin-label">
+            <div class="pin-label-title">Скопје</div>
+            <div class="pin-label-meta">50 m² · ТЦ БИСЕР, АЕРОДРОМ</div>
+          </div>
+        </div>
+
+        <div class="pin pin-ohrid" style="top:63%;left:20%" tabindex="0" data-pin="ohrid">
+          <div class="pin-pop pin-pop-ohrid">
+            <div class="pin-pop-card pin-pop-fade pin-pop-fade-up">
+              <div class="pin-pop-card-inner">
+                <img src="assets/img/pin-ohrid.webp" alt="Охрид — фото на екранот" class="pin-pop-img">
+                <div class="pin-pop-body">
+                  <div class="pin-pop-title">Охрид — Центар</div>
+                  <div class="pin-pop-meta">40 m² · Главен кружен тек</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <span class="pin-dot pin-dot-orange"><span class="pin-pulse pin-pulse-orange"></span></span>
+          <div class="pin-label">
+            <div class="pin-label-title">Охрид</div>
+            <div class="pin-label-meta">40 m² · ГЛАВЕН КРУЖЕН ТЕК</div>
+          </div>
+        </div>
+
+        <div class="pin pin-gev" style="top:82%;left:60%" tabindex="0" data-pin="gev">
+          <div class="pin-pop pin-pop-gev">
+            <div class="pin-pop-grid pin-pop-fade pin-pop-fade-up">
+              <div class="pin-pop-card">
+                <div class="pin-pop-card-inner">
+                  <img src="assets/img/pin-gev-plostad.webp" alt="Плоштад — фото" class="pin-pop-img pin-pop-img-sm">
+                  <div class="pin-pop-body pin-pop-body-sm">
+                    <div class="pin-pop-title pin-pop-title-sm">Гевгелија — Плоштад</div>
+                    <div class="pin-pop-meta">15 m²</div>
+                  </div>
+                </div>
+              </div>
+              <div class="pin-pop-card">
+                <div class="pin-pop-card-inner">
+                  <img src="assets/img/pin-gev-bulevar.webp" alt="Булевар — фото" class="pin-pop-img pin-pop-img-sm">
+                  <div class="pin-pop-body pin-pop-body-sm">
+                    <div class="pin-pop-title pin-pop-title-sm">Гевгелија — Булевар</div>
+                    <div class="pin-pop-meta">15 m² · Кружен тек</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <span class="pin-dot pin-dot-green"><span class="pin-pulse pin-pulse-green"></span></span>
+          <div class="pin-label">
+            <div class="pin-label-title">Гевгелија</div>
+            <div class="pin-label-meta">2 × 15 m² · ПЛОШТАД + БУЛЕВАР</div>
+          </div>
+        </div>
+
+        <div class="map-note" data-i18n="mapNote"></div>
+      </div>
+    </div>
+
+    <!-- CARDS -->
+    <div class="loc-cards">
+      <div class="loc-card loc-card-blue">
+        <div class="loc-card-media">
+          <a href="https://www.youtube.com/watch?v=a0LOYsoLJPA" data-video="a0LOYsoLJPA" data-title-mk="Скопје — Аеродром" data-title-en="Skopje — Aerodrom" title="Скопје — Аеродром" class="loc-card-yt">
+            <img src="https://img.youtube.com/vi/a0LOYsoLJPA/maxresdefault.jpg" alt="Скопје — Аеродром" class="loc-card-yt-img">
+            <div class="loc-card-yt-scrim">
+              <span class="play-badge">▶ <span data-i18n="play"></span></span>
+            </div>
+          </a>
+        </div>
+        <div class="loc-card-body">
+          <div class="loc-card-head">
+            <div class="loc-card-title">Скопје — Аеродром</div>
+            <div class="loc-card-size loc-card-size-blue">50 m²</div>
+          </div>
+          <div class="mono-label loc-card-addr" data-i18n="addr1"></div>
+          <p class="loc-card-text" data-i18n="card1"></p>
+        </div>
+      </div>
+
+      <div class="loc-card loc-card-orange">
+        <div class="loc-card-media">
+          <a href="https://www.youtube.com/watch?v=Pv317kdpnAE" data-video="Pv317kdpnAE" data-title-mk="Охрид — Центар" data-title-en="Ohrid — Centre" title="Охрид — Центар" class="loc-card-yt">
+            <img src="https://img.youtube.com/vi/Pv317kdpnAE/sddefault.jpg" alt="Охрид — Центар" class="loc-card-yt-img">
+            <div class="loc-card-yt-scrim">
+              <span class="play-badge">▶ <span data-i18n="play"></span></span>
+            </div>
+          </a>
+        </div>
+        <div class="loc-card-body">
+          <div class="loc-card-head">
+            <div class="loc-card-title">Охрид — Центар</div>
+            <div class="loc-card-size loc-card-size-orange">40 m²</div>
+          </div>
+          <div class="mono-label loc-card-addr" data-i18n="addr2"></div>
+          <p class="loc-card-text" data-i18n="card2"></p>
+        </div>
+      </div>
+
+      <div class="loc-card loc-card-green">
+        <div class="loc-card-media">
+          <div class="media-placeholder">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+            <span class="media-placeholder-cap">Гевгелија — фото/видео на екранот</span>
+          </div>
+        </div>
+        <div class="loc-card-body">
+          <div class="loc-card-head">
+            <div class="loc-card-title">Гевгелија</div>
+            <div class="loc-card-size loc-card-size-green">2 × 15 m²</div>
+          </div>
+          <div class="mono-label loc-card-addr" data-i18n="addr3"></div>
+          <p class="loc-card-text" data-i18n="card3"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- STATS -->
+    <div class="stats-row">
+      <div>
+        <div class="stat-number stat-number-lg" style="text-shadow:0 0 46px #2F903A">1,000,000+</div>
+        <div class="stat-caption" data-i18n="reach"></div>
+      </div>
+      <div>
+        <div class="stat-number" style="text-shadow:0 0 36px oklch(0.72 0.17 55 / .45)">5</div>
+        <div class="stat-caption stat-caption-sm" data-i18n="screens"></div>
+      </div>
+      <div>
+        <div class="stat-number" style="text-shadow:0 0 36px oklch(0.72 0.17 145 / .45)">18h</div>
+        <div class="stat-caption stat-caption-sm" data-i18n="airtime"></div>
+      </div>
+    </div>
+
+    <!-- VIP -->
+    <div class="vip-block">
+      <div class="vip-glow"></div>
+      <div class="vip-inner">
+        <div class="vip-copy">
+          <div class="vip-badge">VIP</div>
+          <h3 class="vip-title" data-i18n="vipTitle"></h3>
+          <p class="vip-body" data-i18n="vipBody"></p>
+          <div class="vip-points" id="vipPoints"></div>
+        </div>
+        <div class="vip-premium">
+          <div class="vip-premium-number">+40%</div>
+          <div class="mono-label" data-i18n="premium"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </section>
+
+  <!-- ============ SERVICES ============ -->
+  <section id="page-services" class="page" hidden>
+  <div class="wrap page-pad">
+    <div class="page-header-narrow">
+      <h1 class="page-title title-blue" data-i18n="svcTitle"></h1>
+      <p class="page-sub" data-i18n="svcSub"></p>
+    </div>
+    <div class="pillars-grid" id="pillars"></div>
+  </div>
+  </section>
+
+  <!-- ============ PORTFOLIO ============ -->
+  <section id="page-portfolio" class="page" hidden>
+  <div class="wrap page-pad">
+    <div class="page-header">
+      <div class="page-header-copy">
+        <h1 class="page-title title-orange" data-i18n="portTitle"></h1>
+        <p class="page-sub" data-i18n="portSub"></p>
+      </div>
+    </div>
+    <div class="clients-grid" id="clientsGrid"></div>
+  </div>
+  </section>
+
+  <!-- ============ CONTACT ============ -->
+  <section id="page-contact" class="page" hidden>
+  <div class="wrap page-pad">
+    <div class="contact-grid">
+      <div>
+        <h1 class="page-title" data-i18n="conTitle"></h1>
+        <p class="page-sub" data-i18n="conSub"></p>
+
+        <div class="contact-info">
+          <div>
+            <div class="mono-label" data-i18n="phone"></div>
+            <div class="contact-phones">
+              <a href="tel:078320230" class="contact-phone">078 320 230</a>
+              <a href="tel:070223286" class="contact-phone">070 223 286</a>
+            </div>
+          </div>
+          <div>
+            <div class="mono-label">Email</div>
+            <a href="mailto:info@lightboxmedia.mk" class="contact-email">info@lightboxmedia.mk</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-card">
+        <div id="contactSent" class="contact-sent" hidden>
+          <div class="contact-sent-inner">
+            <div class="sent-dot"></div>
+            <div class="sent-title" data-i18n="sentTitle"></div>
+            <div class="sent-body" data-i18n="sentBody"></div>
+          </div>
+        </div>
+
+        <form id="contactForm" class="contact-form">
+          <div class="contact-form-row">
+            <label class="field">
+              <span class="mono-label" data-i18n="fName"></span>
+              <input type="text" required>
+            </label>
+            <label class="field">
+              <span class="mono-label" data-i18n="fCompany"></span>
+              <input type="text">
+            </label>
+            <label class="field">
+              <span class="mono-label">Email</span>
+              <input type="email" required>
+            </label>
+            <label class="field">
+              <span class="mono-label" data-i18n="fPhone"></span>
+              <input type="tel">
+            </label>
+          </div>
+          <label class="field">
+            <span class="mono-label" data-i18n="fLocation"></span>
+            <select>
+              <option>Скопје — Аеродром (50 m²)</option>
+              <option>Охрид — Центар (40 m²)</option>
+              <option>Гевгелија (2 × 15 m²)</option>
+              <option data-i18n="optAll"></option>
+            </select>
+          </label>
+          <label class="field">
+            <span class="mono-label" data-i18n="fMessage"></span>
+            <textarea rows="4"></textarea>
+          </label>
+          <button type="submit" class="btn btn-cta btn-submit" data-i18n="submit"></button>
+          <div class="form-note" data-i18n="formNote"></div>
+        </form>
+      </div>
+    </div>
+  </div>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <img src="assets/logo-white.png" alt="Lightbox Media" height="56" class="footer-logo">
+    <div class="mono-label">info@lightboxmedia.mk · 078 320 230 · 070 223 286</div>
+    <div class="mono-label footer-copy">© 2026</div>
+  </div>
+</footer>
+
+<!-- VIDEO MODAL -->
+<div id="videoModal" class="video-modal" hidden>
+  <div class="video-modal-panel">
+    <div class="video-modal-head">
+      <div id="videoModalTitle" class="video-modal-title"></div>
+      <button type="button" id="videoModalClose" class="video-modal-close" aria-label="Close">✕</button>
+    </div>
+    <div class="video-modal-frame">
+      <iframe id="videoModalIframe" title="video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+    </div>
+    <a id="videoModalYtLink" href="#" target="_blank" rel="noopener" class="video-modal-yt"></a>
+  </div>
+</div>
+
+<script src="js/app.js"></script>
+</body>
+</html>
