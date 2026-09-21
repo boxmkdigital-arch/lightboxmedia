@@ -19,23 +19,20 @@
       <img src="assets/logo-white.png" alt="Lightbox Media" height="46">
     </a>
 
-    <nav class="nav-links" id="navLinks">
-      <a href="#/" data-goto="home" class="nav-link"><span class="lang-mk">Дома</span><span class="lang-en">Home</span></a>
+    <nav class="nav-links" data-navlinks>
+      <a href="#/" data-goto="home" class="nav-link"><span class="lang-mk">Насловна</span><span class="lang-en">Home</span></a>
       <a href="#/locations" data-goto="locations" class="nav-link"><span class="lang-mk">Локации</span><span class="lang-en">Locations</span></a>
       <a href="#/services" data-goto="services" class="nav-link"><span class="lang-mk">Услуги</span><span class="lang-en">Services</span></a>
       <a href="#/portfolio" data-goto="portfolio" class="nav-link"><span class="lang-mk">Портфолио</span><span class="lang-en">Portfolio</span></a>
       <a href="#/contact" data-goto="contact" class="nav-link"><span class="lang-mk">Контакт</span><span class="lang-en">Contact</span></a>
     </nav>
 
-    <div class="nav-actions">
+    <div class="nav-actions" data-navcta>
       <button type="button" class="lang-toggle" id="langToggle" aria-label="Switch language">
         <span class="mk-pill">MK</span><span class="pill-sep">|</span><span class="en-pill">EN</span>
       </button>
       <button type="button" class="btn btn-cta" data-goto="contact">
         <span class="lang-mk">Резервирај</span><span class="lang-en">Book now</span>
-      </button>
-      <button type="button" class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false" aria-controls="navLinks">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
       </button>
     </div>
   </div>
@@ -57,8 +54,8 @@
         <h1 class="hero-title" data-i18n="homeTitle"></h1>
         <p class="hero-sub" data-i18n="homeSub"></p>
         <div class="hero-ctas">
-          <button type="button" class="btn btn-cta" data-goto="contact" data-i18n="ctaBook"></button>
-          <button type="button" class="btn btn-outline" data-goto="locations" data-i18n="ctaLocations"></button>
+          <button type="button" class="btn btn-cta btn-nowrap" data-goto="contact" data-i18n="ctaBook"></button>
+          <button type="button" class="btn btn-outline btn-nowrap" data-goto="locations" data-i18n="ctaLocations"></button>
         </div>
       </div>
     </div>
@@ -146,6 +143,43 @@
       </div>
     </div>
 
+    <!-- LOCATION REELS -->
+    <div class="wrap section-top-sm">
+      <div class="mono-label section-eyebrow" data-i18n="videoStrip"></div>
+      <div class="reels-grid">
+        <div class="reel-card reel-card-blue">
+          <a href="https://www.youtube.com/watch?v=a0LOYsoLJPA" data-video="a0LOYsoLJPA" data-title-mk="Скопје — Аеродром" data-title-en="Skopje — Aerodrom" title="Скопје — Аеродром" class="reel-card-yt">
+            <img src="https://img.youtube.com/vi/a0LOYsoLJPA/maxresdefault.jpg" alt="Скопје — Аеродром" class="reel-card-img">
+            <div class="reel-card-scrim"><span class="play-badge">▶ <span data-i18n="play"></span></span></div>
+          </a>
+          <div class="reel-card-body">
+            <div class="reel-card-title">Скопје</div>
+            <div class="reel-card-size reel-card-size-blue">50 m²</div>
+          </div>
+        </div>
+        <div class="reel-card reel-card-orange">
+          <a href="https://www.youtube.com/watch?v=Pv317kdpnAE" data-video="Pv317kdpnAE" data-title-mk="Охрид — Центар" data-title-en="Ohrid — Centre" title="Охрид — Центар" class="reel-card-yt">
+            <img src="https://img.youtube.com/vi/Pv317kdpnAE/sddefault.jpg" alt="Охрид — Центар" class="reel-card-img">
+            <div class="reel-card-scrim"><span class="play-badge">▶ <span data-i18n="play"></span></span></div>
+          </a>
+          <div class="reel-card-body">
+            <div class="reel-card-title">Охрид</div>
+            <div class="reel-card-size reel-card-size-orange">40 m²</div>
+          </div>
+        </div>
+        <div class="reel-card reel-card-green">
+          <a href="https://www.youtube.com/watch?v=Yf_1vpeQTqI" data-video="Yf_1vpeQTqI" data-title-mk="Гевгелија" data-title-en="Gevgelija" title="Гевгелија" class="reel-card-yt">
+            <img src="https://img.youtube.com/vi/Yf_1vpeQTqI/hqdefault.jpg" alt="Гевгелија" class="reel-card-img">
+            <div class="reel-card-scrim"><span class="play-badge">▶ <span data-i18n="play"></span></span></div>
+          </a>
+          <div class="reel-card-body">
+            <div class="reel-card-title">Гевгелија</div>
+            <div class="reel-card-size reel-card-size-green">2 × 15 m²</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- REACH -->
     <div class="wrap section-top section-bottom">
       <div class="reach-grid">
@@ -157,12 +191,16 @@
       </div>
     </div>
 
-    <!-- CLIENTS STRIP -->
+    <!-- CLIENTS MARQUEE -->
     <div class="clients-strip">
       <div class="wrap clients-strip-inner">
         <div class="mono-label" data-i18n="trustedBy"></div>
-        <div class="clients-logos" id="homeLogos"></div>
-        <a href="#/portfolio" data-goto="portfolio" class="see-all"><span data-i18n="seeAll"></span> →</a>
+        <div class="marquee" data-marquee>
+          <div class="marquee-track" data-marquee-track>
+            <div class="marquee-half" id="homeLogos"></div>
+            <div class="marquee-half" id="homeLogosB" aria-hidden="true"></div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -174,7 +212,7 @@
           <div>
             <h2 class="cta-band-title" data-i18n="homeCta"></h2>
             <div class="cta-band-contacts">
-              <a href="tel:078320230" class="contact-link-blue">078 320 230</a>
+              <a href="tel:078320230" class="contact-link-white">078 320 230</a>
               <a href="tel:070223286">070 223 286</a>
               <a href="mailto:info@lightboxmedia.mk" class="contact-link-green">info@lightboxmedia.mk</a>
             </div>
@@ -317,10 +355,12 @@
 
       <div class="loc-card loc-card-green">
         <div class="loc-card-media">
-          <div class="media-placeholder">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
-            <span class="media-placeholder-cap">Гевгелија — фото/видео на екранот</span>
-          </div>
+          <a href="https://www.youtube.com/watch?v=Yf_1vpeQTqI" data-video="Yf_1vpeQTqI" data-title-mk="Гевгелија" data-title-en="Gevgelija" title="Гевгелија" class="loc-card-yt">
+            <img src="https://img.youtube.com/vi/Yf_1vpeQTqI/hqdefault.jpg" alt="Гевгелија" class="loc-card-yt-img">
+            <div class="loc-card-yt-scrim">
+              <span class="play-badge">▶ <span data-i18n="play"></span></span>
+            </div>
+          </a>
         </div>
         <div class="loc-card-body">
           <div class="loc-card-head">
@@ -340,7 +380,7 @@
         <div class="stat-caption" data-i18n="reach"></div>
       </div>
       <div>
-        <div class="stat-number" style="text-shadow:0 0 36px oklch(0.72 0.17 55 / .45)">5</div>
+        <div class="stat-number" style="text-shadow:0 0 36px oklch(0.72 0.17 55 / .45)">4</div>
         <div class="stat-caption stat-caption-sm" data-i18n="screens"></div>
       </div>
       <div>
@@ -397,7 +437,7 @@
   <div class="wrap page-pad">
     <div class="contact-grid">
       <div>
-        <h1 class="page-title" data-i18n="conTitle"></h1>
+        <h1 class="page-title page-title-sm" data-i18n="conTitle"></h1>
         <p class="page-sub" data-i18n="conSub"></p>
 
         <div class="contact-info">
@@ -446,10 +486,10 @@
           <label class="field">
             <span class="mono-label" data-i18n="fLocation"></span>
             <select>
-              <option>Скопје — Аеродром (50 m²)</option>
               <option>Охрид — Центар (40 m²)</option>
               <option>Гевгелија (2 × 15 m²)</option>
-              <option data-i18n="optAll"></option>
+              <option>Скопје - Аеродром (50 m²)</option>
+              <option>Цела Мрежа</option>
             </select>
           </label>
           <label class="field">

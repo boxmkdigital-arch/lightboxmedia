@@ -11,7 +11,7 @@
       homeSub: "Стратешки позиции со највисока фреквенција на сообраќај и видливост во Македонија.",
       ctaBook: "Резервирај термин", ctaLocations: "Види локации",
       reachLong: "Месечен досег на публика во мрежата",
-      seeAll: "Види сè", trustedBy: "Клиенти што ни веруваат",
+      seeAll: "Види сè", trustedBy: "Клиенти што ни веруваат", videoStrip: "Видео од локациите",
       homeCta: "Резервирајте го вашиот термин уште денес.",
       locTitle: "Локации",
       locSub: "Стратешки позиции со највисока фреквенција на сообраќај и видливост во Македонија. Одлична видливост за пешаци и возачи, присуство во секојдневната рутина на локалното население.",
@@ -47,7 +47,7 @@
       homeSub: "Strategic positions with the highest traffic frequency and visibility in Macedonia, plus full marketing production under one roof.",
       ctaBook: "Book a slot", ctaLocations: "View locations",
       reachLong: "Monthly audience reach across the network",
-      seeAll: "See all", trustedBy: "Trusted by",
+      seeAll: "See all", trustedBy: "Trusted by", videoStrip: "Location reels",
       homeCta: "Book your slot today.",
       locTitle: "Locations",
       locSub: "Strategic positions with the highest traffic frequency and visibility in Macedonia. Excellent visibility for pedestrians and drivers, present in the daily routine of the local population.",
@@ -151,26 +151,12 @@
     { name: "Client 12", img: "assets/img/portfolio/logo-12.webp" }
   ];
 
-  // Homepage "trusted by" strip: only slot 1 has a real logo so far — the
-  // rest render as empty placeholders until more client logos are supplied.
-  const HOME_LOGOS = [
-    { img: "assets/img/home-logo-1.webp" },
-    { img: null },
-    { img: null },
-    { img: null },
-    { img: null }
-  ];
-
   const ROUTES = { "": "home", "/": "home", locations: "locations", services: "services", portfolio: "portfolio", contact: "contact" };
 
   /* ============================================================
      Helpers
      ============================================================ */
   const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
-
-  const placeholderIcon =
-    '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">' +
-    '<rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>';
 
   let currentLang = "MK";
 
@@ -219,12 +205,14 @@
       </div>`).join("");
   }
 
+  // Home marquee shows the same 12 client logos as Portfolio, duplicated
+  // into two identical halves so the -50% translate loop is seamless.
   function renderHomeLogos() {
-    document.getElementById("homeLogos").innerHTML = HOME_LOGOS.map((l) =>
-      l.img
-        ? `<div class="client-logo-wrap"><img src="${l.img}" alt="Client logo" loading="lazy"></div>`
-        : `<div class="client-logo-wrap"><div class="media-placeholder">${placeholderIcon}<span class="media-placeholder-cap">лого</span></div></div>`
+    const html = CLIENTS.map((c) =>
+      `<div class="client-logo-wrap"><img src="${c.img}" alt="${esc(c.name)}" loading="lazy"></div>`
     ).join("");
+    document.getElementById("homeLogos").innerHTML = html;
+    document.getElementById("homeLogosB").innerHTML = html;
   }
 
   function renderClientsGrid() {
@@ -292,24 +280,11 @@
   /* ============================================================
      Wire-up
      ============================================================ */
-  const navLinks = document.getElementById("navLinks");
-  const navToggle = document.getElementById("navToggle");
-
-  function closeMobileNav() {
-    navLinks.classList.remove("open");
-    navToggle.setAttribute("aria-expanded", "false");
-  }
-
-  navToggle.addEventListener("click", () => {
-    const open = navLinks.classList.toggle("open");
-    navToggle.setAttribute("aria-expanded", String(open));
-  });
-
   document.addEventListener("click", (e) => {
     const goto = e.target.closest("[data-goto]");
-    if (goto) { e.preventDefault(); setPage(goto.getAttribute("data-goto")); closeMobileNav(); return; }
+    if (goto) { e.preventDefault(); setPage(goto.getAttribute("data-goto")); return; }
 
-    const yt = e.target.closest(".loc-card-yt");
+    const yt = e.target.closest("[data-video]");
     if (yt) {
       e.preventDefault();
       const id = yt.getAttribute("data-video");
