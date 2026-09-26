@@ -1,0 +1,9 @@
+{
+  "name": "lightboxmedia-site",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Lightbox Media — static site with a serverless contact-form endpoint",
+  "dependencies": {
+    "nodemailer": "^6.9.15"
+  }
+}

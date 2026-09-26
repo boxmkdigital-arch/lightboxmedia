@@ -36,8 +36,9 @@
       phone: "Телефон",
       fName: "Име и презиме", fCompany: "Компанија", fPhone: "Телефон",
       fLocation: "Локација од интерес", fMessage: "Кратко за кампањата",
-      optAll: "Целата мрежа", submit: "Испрати барање",
+      optAll: "Целата мрежа", submit: "Испрати барање", submitting: "Испраќање…",
       formNote: "Барањето оди директно во нашиот CRM. Без обврска и без автоматски маркетинг пораки.",
+      formError: "Настана грешка при испраќањето. Обидете се повторно или јавете се директно.",
       sentTitle: "Барањето е испратено", sentBody: "Ве контактираме во рок од 24 часа.",
       openOnYt: "Отвори на YouTube"
     },
@@ -72,8 +73,9 @@
       phone: "Phone",
       fName: "Full name", fCompany: "Company", fPhone: "Phone",
       fLocation: "Location of interest", fMessage: "About the campaign",
-      optAll: "Entire network", submit: "Send inquiry",
+      optAll: "Entire network", submit: "Send inquiry", submitting: "Sending…",
       formNote: "Inquiries land straight in our CRM. No obligation and no automated marketing mail.",
+      formError: "Something went wrong sending your inquiry. Please try again or contact us directly.",
       sentTitle: "Inquiry sent", sentBody: "We will get back to you within 24 hours.",
       openOnYt: "Open on YouTube"
     }
@@ -303,13 +305,32 @@
     applyLang(currentLang === "MK" ? "EN" : "MK");
   });
 
-  document.getElementById("contactForm").addEventListener("submit", (e) => {
+  document.getElementById("contactForm").addEventListener("submit", async (e) => {
     e.preventDefault();
-    // No backend is wired up yet — this mirrors the prototype's client-only
-    // confirmation. Before go-live, replace this with a real submit (fetch
-    // to a CRM/API endpoint, a form service, etc).
-    document.getElementById("contactForm").hidden = true;
-    document.getElementById("contactSent").hidden = false;
+    const form = e.currentTarget;
+    const errorEl = document.getElementById("contactError");
+    const submitBtn = form.querySelector(".btn-submit");
+    const data = Object.fromEntries(new FormData(form).entries());
+
+    errorEl.hidden = true;
+    submitBtn.disabled = true;
+    const originalLabel = submitBtn.textContent;
+    submitBtn.textContent = COPY[currentLang].submitting;
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      if (!res.ok) throw new Error("request failed");
+      form.hidden = true;
+      document.getElementById("contactSent").hidden = false;
+    } catch (err) {
+      errorEl.hidden = false;
+      submitBtn.disabled = false;
+      submitBtn.textContent = originalLabel;
+    }
   });
 
   window.addEventListener("popstate", syncFromHash);

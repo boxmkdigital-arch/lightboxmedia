@@ -468,24 +468,24 @@
           <div class="contact-form-row">
             <label class="field">
               <span class="mono-label" data-i18n="fName"></span>
-              <input type="text" required>
+              <input type="text" name="name" required>
             </label>
             <label class="field">
               <span class="mono-label" data-i18n="fCompany"></span>
-              <input type="text">
+              <input type="text" name="company">
             </label>
             <label class="field">
               <span class="mono-label">Email</span>
-              <input type="email" required>
+              <input type="email" name="email" required>
             </label>
             <label class="field">
               <span class="mono-label" data-i18n="fPhone"></span>
-              <input type="tel">
+              <input type="tel" name="phone">
             </label>
           </div>
           <label class="field">
             <span class="mono-label" data-i18n="fLocation"></span>
-            <select>
+            <select name="location">
               <option>Охрид — Центар (40 m²)</option>
               <option>Гевгелија (2 × 15 m²)</option>
               <option>Скопје - Аеродром (50 m²)</option>
@@ -494,9 +494,11 @@
           </label>
           <label class="field">
             <span class="mono-label" data-i18n="fMessage"></span>
-            <textarea rows="4"></textarea>
+            <textarea rows="4" name="message"></textarea>
           </label>
+          <input type="text" name="website" class="field-honeypot" tabindex="-1" autocomplete="off" aria-hidden="true">
           <button type="submit" class="btn btn-cta btn-submit" data-i18n="submit"></button>
+          <div id="contactError" class="form-error" data-i18n="formError" hidden></div>
           <div class="form-note" data-i18n="formNote"></div>
         </form>
       </div>
